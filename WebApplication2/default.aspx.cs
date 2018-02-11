@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
-using eHR.Framework;
 using System.Data.SqlClient;
 
 namespace WebApplication2
