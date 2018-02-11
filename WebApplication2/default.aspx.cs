@@ -10,7 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
 using eHR.Framework;
-
+using System.Data.SqlClient;
 
 namespace WebApplication2
 {
@@ -23,6 +23,7 @@ namespace WebApplication2
                                     ,"심쿵스쿠","크림슨스쿠","절터는스쿠님","스쿠님용축요","스쿠님샷건요"};
         private string[] skuKaiID = new string[16];
         private int _skuCount = 1;
+        string dbConnect = "server = 118.37.235.181; uid=sku; pwd = tmzn; database = wajangchang";
         //d9ba8ef7552d6165e6e8cf6388967571 = 독품은스쿠
         #endregion
 
@@ -57,7 +58,15 @@ namespace WebApplication2
             getItemList();
             getBoosterList();
         }
+
+        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvList.PageIndex = e.NewPageIndex;
+            getCacIdArray();
+            getItemList(skuKaiID);
+        }
         #endregion
+
         #region #UI 메소드
         private JObject getDfJson(string url)
         {
@@ -224,13 +233,31 @@ namespace WebApplication2
             gvList.DataSource = dt;
             gvList.DataBind();
         }
-        #endregion
 
-        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        /// <summary>
+        /// character_info 테이블 Select
+        /// </summary>
+        /// <returns></returns>
+        public DataSet getInfo()
         {
-            gvList.PageIndex = e.NewPageIndex;
-            getCacIdArray();
-            getItemList(skuKaiID);
+            DataSet ds = new DataSet();
+
+            //db연결
+            SqlConnection conn = new SqlConnection(dbConnect);
+            conn.Open();
+
+            //sql 조회문
+            string sql = "Select id,serverId,characterId,characterName,adventureName,quildId From character_info";
+            
+            SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
+
+            //조회한 결과를 dataset에 저장 후 리턴
+            ad.Fill(ds);
+
+            conn.Close();
+            return ds;
         }
+        #endregion
+      
     }
 }
