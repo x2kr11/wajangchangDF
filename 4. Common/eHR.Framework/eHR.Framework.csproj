@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BAF423B4-33D7-4665-A527-30517AD4202A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eHR.Framework</RootNamespace>
+    <AssemblyName>eHR.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ajax">
+      <HintPath>..\..\5. Lib\Ajax.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\5. Lib\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxPro">
+      <HintPath>..\..\5. Lib\AjaxPro.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxPro.2">
+      <HintPath>..\..\5. Lib\AjaxPro.2.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxPro.JSON">
+      <HintPath>..\..\5. Lib\AjaxPro.JSON.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxPro.JSON.2">
+      <HintPath>..\..\5. Lib\AjaxPro.JSON.2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mosti.GTFileUploadSL.Server">
+      <HintPath>..\..\5. Lib\Mosti.GTFileUploadSL.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Skcc.Core">
+      <HintPath>..\..\5. Lib\Skcc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Skcc.Data">
+      <HintPath>..\..\5. Lib\Skcc.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Skcc.IoC">
+      <HintPath>..\..\5. Lib\Skcc.IoC.dll</HintPath>
+    </Reference>
+    <Reference Include="Skcc.Transactions">
+      <HintPath>..\..\5. Lib\Skcc.Transactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Skcc.Utilities">
+      <HintPath>..\..\5. Lib\Skcc.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Skcc.Web">
+      <HintPath>..\..\5. Lib\Skcc.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Skcc.Web.Services">
+      <HintPath>..\..\5. Lib\Skcc.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseInterface\IClientPopMessage.cs" />
+    <Compile Include="BaseInterface\ILayerMasterPageDesign.cs" />
+    <Compile Include="BaseInterface\IMasterPageDesign.cs" />
+    <Compile Include="Base\ShBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\ShBaseAuth.cs" />
+    <Compile Include="Base\ShBizBase.cs" />
+    <Compile Include="Base\ShDacBase.cs" />
+    <Compile Include="Base\ShMasterPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\ShPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\ShParam.cs" />
+    <Compile Include="Base\ShPopUpBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\ShUserControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\CreateCalendarData.cs" />
+    <Compile Include="Common\Helper_ControlExpansion.cs" />
+    <Compile Include="Common\Helper_Data.cs" />
+    <Compile Include="Common\Helper_DataExpansion.cs" />
+    <Compile Include="Common\Helper_Eapp.cs" />
+    <Compile Include="Common\Helper_EnumExpansion.cs" />
+    <Compile Include="Common\Helper_Excel.cs" />
+    <Compile Include="Common\Helper_IO.cs" />
+    <Compile Include="Common\Helper_Log.cs" />
+    <Compile Include="Common\Helper_Mail.cs" />
+    <Compile Include="Common\Helper_String.cs" />
+    <Compile Include="Common\Helper_StringExpansion.cs" />
+    <Compile Include="Common\Helper_Web.cs" />
+    <Compile Include="Common\Utils.cs" />
+    <Compile Include="Consts\Consts.cs" />
+    <Compile Include="Control\Cryptography\EnDe.cs" />
+    <Compile Include="Control\Cryptography\OneWayHash.cs" />
+    <Compile Include="Control\Cryptography\QueryStringEnDeModule.cs" />
+    <Compile Include="Control\Cryptography\ShCrypt.cs" />
+    <Compile Include="Control\Cryptography\UserEnDe.cs" />
+    <Compile Include="Control\ShButton.cs" />
+    <Compile Include="Control\ShCalendar.cs" />
+    <Compile Include="Control\ShDropDownList.cs" />
+    <Compile Include="Control\ShEappLinkButton.cs" />
+    <Compile Include="Control\ShImageButton.cs" />
+    <Compile Include="Control\ShLinkButton.cs" />
+    <Compile Include="Control\ShLiteral.cs" />
+    <Compile Include="Control\ShPageNavigatorcs.cs" />
+    <Compile Include="Control\ShPageNavigatorcsNew.cs" />
+    <Compile Include="Control\ShRepeater\DynamicTmp.cs" />
+    <Compile Include="Control\ShRepeater\RepeaterBody.cs" />
+    <Compile Include="Control\ShRepeater\RepeaterHeader.cs" />
+    <Compile Include="Control\ShSearchImageButton.cs" />
+    <Compile Include="Control\ShTextBox.cs" />
+    <Compile Include="Control\ShTreeView\ShTreeNode.cs" />
+    <Compile Include="Control\ShTreeView\ShTreeView.cs" />
+    <Compile Include="Control\ShTreeView\TreeHierarchicalDataSource.cs" />
+    <Compile Include="Enum\ResX.cs" />
+    <Compile Include="Exception\ShAppException.cs" />
+    <Compile Include="Exception\ShException.cs" />
+    <Compile Include="FileUpload\GtFileUploadInfo.cs" />
+    <Compile Include="FileUpload\Utils.FileUpload.cs" />
+    <Compile Include="HtmlParser\Attribute.cs" />
+    <Compile Include="HtmlParser\AttributeList.cs" />
+    <Compile Include="HtmlParser\Parse.cs" />
+    <Compile Include="HtmlParser\ParseHTML.cs" />
+    <Compile Include="Mail\AttachFile.cs" />
+    <Compile Include="Mail\CredentialType.cs" />
+    <Compile Include="Mail\MailClient.cs" />
+    <Compile Include="Mail\Receiver.cs" />
+    <Compile Include="Mail\Sender.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SequentialNumber\Sequential.cs" />
+    <Compile Include="Sessions\Cookie.cs" />
+    <Compile Include="Sessions\UserProfile.cs" />
+    <Compile Include="Sessions\UserProfileM.cs" />
+    <Compile Include="Sessions\Utils.Network.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\2. Biz\eHR.Framework.Biz\eHR.Cmn.Biz.csproj">
+      <Project>{68b4fbf5-22ec-4ecf-b466-ea0c683fce83}</Project>
+      <Name>eHR.Cmn.Biz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\3. Dac\eHR.Framework.Dac\eHR.Cmn.Dac.csproj">
+      <Project>{0f15781d-1889-4cf4-9f9d-9c8ee40ab08d}</Project>
+      <Name>eHR.Cmn.Dac</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

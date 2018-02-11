@@ -1,0 +1,333 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{119B8456-52FE-48B9-AF28-C00E5200DC6B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication2</RootNamespace>
+    <AssemblyName>WebApplication2</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="eHR.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\eHR.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="styles\font\Roboto-Bold.otf" />
+    <Content Include="styles\font\Roboto-Bold.woff" />
+    <Content Include="styles\font\Roboto-Bold.woff2" />
+    <Content Include="styles\font\Roboto-Light.otf" />
+    <Content Include="styles\font\Roboto-Light.woff" />
+    <Content Include="styles\font\Roboto-Light.woff2" />
+    <Content Include="styles\font\Roboto-Medium.otf" />
+    <Content Include="styles\font\Roboto-Medium.woff" />
+    <Content Include="styles\font\Roboto-Medium.woff2" />
+    <Content Include="styles\font\Roboto-Regular.otf" />
+    <Content Include="styles\font\Roboto-Regular.woff" />
+    <Content Include="styles\font\Roboto-Regular.woff2" />
+    <Content Include="styles\font\Roboto-Thin.otf" />
+    <Content Include="styles\font\Roboto-Thin.woff" />
+    <Content Include="styles\font\Roboto-Thin.woff2" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="styles\css\board01.css" />
+    <Content Include="styles\css\btn01.css" />
+    <Content Include="styles\css\common.css" />
+    <Content Include="styles\css\contents_static.css" />
+    <Content Include="styles\css\layout.css" />
+    <Content Include="styles\css\main.css" />
+    <Content Include="styles\css\object.css" />
+    <Content Include="styles\css\popup.css" />
+    <Content Include="styles\css\table01.css" />
+    <Content Include="styles\images\board01\attachment_img.png" />
+    <Content Include="styles\images\board01\board_exp.png" />
+    <Content Include="styles\images\board01\board_exp_tri.png" />
+    <Content Include="styles\images\board01\board_list.png" />
+    <Content Include="styles\images\board01\board_otlk.png" />
+    <Content Include="styles\images\board01\board_profile_ver_line.gif" />
+    <Content Include="styles\images\board01\board_schedule.png" />
+    <Content Include="styles\images\board01\board_status_ver_line.gif" />
+    <Content Include="styles\images\board01\board_thumb.png" />
+    <Content Include="styles\images\board01\board_thumb_ver_line.gif" />
+    <Content Include="styles\images\board01\board_tile_large.png" />
+    <Content Include="styles\images\board01\board_tile_large_gradient.png" />
+    <Content Include="styles\images\board01\board_tile_large_view.png" />
+    <Content Include="styles\images\board01\board_tile_large_view_gradient.png" />
+    <Content Include="styles\images\board01\board_tile_medium.png" />
+    <Content Include="styles\images\board01\board_tile_medium_gradient.png" />
+    <Content Include="styles\images\board01\board_tile_medium_tit_bg.png" />
+    <Content Include="styles\images\board01\board_tile_medium_view.png" />
+    <Content Include="styles\images\board01\board_tile_medium_view_gradient.png" />
+    <Content Include="styles\images\board01\board_tile_small_a.png" />
+    <Content Include="styles\images\board01\board_tile_small_a_gradient.png" />
+    <Content Include="styles\images\board01\board_tile_small_b.png" />
+    <Content Include="styles\images\board01\board_tile_small_b_gradient.png" />
+    <Content Include="styles\images\board01\board_timeline.png" />
+    <Content Include="styles\images\board01\board_timeline_x_left.png" />
+    <Content Include="styles\images\board01\board_timeline_x_right.png" />
+    <Content Include="styles\images\board01\board_timeline_y.png" />
+    <Content Include="styles\images\board01\board_view.png" />
+    <Content Include="styles\images\board01\cmt.png" />
+    <Content Include="styles\images\board01\icoStar.png" />
+    <Content Include="styles\images\btn01\btn_fix.png" />
+    <Content Include="styles\images\btn01\btn_ico.png" />
+    <Content Include="styles\images\common\bg_login.jpg" />
+    <Content Include="styles\images\common\error_img.png" />
+    <Content Include="styles\images\common\error_img2.png" />
+    <Content Include="styles\images\common\login_logo.png" />
+    <Content Include="styles\images\common\no_img.png" />
+    <Content Include="styles\images\common\no_img_pro110x120.jpg" />
+    <Content Include="styles\images\common\no_img_pro30x30.jpg" />
+    <Content Include="styles\images\common\no_img_pro50x50.jpg" />
+    <Content Include="styles\images\common\no_img_pro60x60.jpg" />
+    <Content Include="styles\images\common\test2.jpg" />
+    <Content Include="styles\images\common\tooltip_top.png" />
+    <Content Include="styles\images\common\tooltip_top2.png" />
+    <Content Include="styles\images\contents_static\contents_static_rolling.png" />
+    <Content Include="styles\images\contents_static\contents_static_step.png" />
+    <Content Include="styles\images\favicon.ico" />
+    <Content Include="styles\images\footer\footer.jpg" />
+    <Content Include="styles\images\footer\footer_family_dark.png" />
+    <Content Include="styles\images\footer\footer_family_dark_line.gif" />
+    <Content Include="styles\images\footer\footer_family_light.png" />
+    <Content Include="styles\images\footer\footer_family_light_line.gif" />
+    <Content Include="styles\images\form\calendar - 복사본.jpg" />
+    <Content Include="styles\images\form\calendar.jpg" />
+    <Content Include="styles\images\form\datepicker.png" />
+    <Content Include="styles\images\form\form.png" />
+    <Content Include="styles\images\form\form_default.png" />
+    <Content Include="styles\images\form\form_textarea_hori_line.png" />
+    <Content Include="styles\images\form\form_textarea_hori_line_focus.png" />
+    <Content Include="styles\images\form\form_textarea_hori_line_hover.png" />
+    <Content Include="styles\images\gnb_sub\gnb_sub_3depth_full_dark.png" />
+    <Content Include="styles\images\gnb_sub\gnb_sub_3depth_mega.png" />
+    <Content Include="styles\images\gnb_top\board_list.png" />
+    <Content Include="styles\images\gnb_top\essencore_logo.png" />
+    <Content Include="styles\images\gnb_top\gnb.jpg" />
+    <Content Include="styles\images\gnb_top\gnb_top_basic_opt.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_light.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_light_line.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_mega.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_mega_line.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_mega_selected.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_mega_selected_skin04.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_mega_selected_skin05.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch.gif" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch_line.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch_selected.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch_selected_on.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch_selected_skin04.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch_selected_skin05.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch_skin07.png" />
+    <Content Include="styles\images\gnb_top\gnb_top_seperate_srch_skin08.png" />
+    <Content Include="styles\images\infobox\infobox.png" />
+    <Content Include="styles\images\lay_item\lay_item.png" />
+    <Content Include="styles\images\lnb\lnb_basic.png" />
+    <Content Include="styles\images\lnb\lnb_basic_bu.png" />
+    <Content Include="styles\images\lnb\lnb_basic_ico_tit.png" />
+    <Content Include="styles\images\lnb\lnb_basic_tree.png" />
+    <Content Include="styles\images\lnb\lnb_basic_tree_line_hori.png" />
+    <Content Include="styles\images\lnb\lnb_basic_tree_line_hori_fst.png" />
+    <Content Include="styles\images\lnb\lnb_basic_tree_line_hori_fst_depth.png" />
+    <Content Include="styles\images\lnb\lnb_basic_tree_line_hori_lst.png" />
+    <Content Include="styles\images\lnb\lnb_basic_tree_line_vert.png" />
+    <Content Include="styles\images\lnb\lnb_srch.png" />
+    <Content Include="styles\images\loc_info\loc_info_basic.png" />
+    <Content Include="styles\images\loc_info\loc_info_selective.png" />
+    <Content Include="styles\images\main\bg_birthday.png" />
+    <Content Include="styles\images\main\bg_leave.png" />
+    <Content Include="styles\images\main\bullet_birth.png" />
+    <Content Include="styles\images\main\bullet_more.png" />
+    <Content Include="styles\images\main\bullet_notice.png" />
+    <Content Include="styles\images\main\bullet_user.png" />
+    <Content Include="styles\images\main\img_visual.jpg" />
+    <Content Include="styles\images\main\mail_top.png" />
+    <Content Include="styles\images\main\sample.png" />
+    <Content Include="styles\images\nav_paging\nav_paging.png" />
+    <Content Include="styles\images\opt_tit\opt_tit_bu.png" />
+    <Content Include="styles\images\pop\msg_confirm.png" />
+    <Content Include="styles\images\pop\msg_error.png" />
+    <Content Include="styles\images\pop\msg_info.png" />
+    <Content Include="styles\images\pop\msg_warning.png" />
+    <Content Include="styles\images\pop\pop_alert.png" />
+    <Content Include="styles\images\pop\pop_alert_line.png" />
+    <Content Include="styles\images\pop\pop_contents.png" />
+    <Content Include="styles\images\pop\pop_gnb.png" />
+    <Content Include="styles\images\pop\pop_layer.png" />
+    <Content Include="styles\images\pop\pop_window.png" />
+    <Content Include="styles\images\preview\pre_ico.png" />
+    <Content Include="styles\images\sidebar\sidebar.png" />
+    <Content Include="styles\images\sidebar\sidebar_smart.png" />
+    <Content Include="styles\images\sitemap\sitemap_basic_3depth.png" />
+    <Content Include="styles\images\sitemap\sitemap_line_3depth.png" />
+    <Content Include="styles\images\step\step_bar.png" />
+    <Content Include="styles\images\step\step_rectangular.png" />
+    <Content Include="styles\images\step\step_rectangular2.png" />
+    <Content Include="styles\images\step\step_rounded.png" />
+    <Content Include="styles\images\step\step_rounded2.png" />
+    <Content Include="styles\images\system_error\system_error.png" />
+    <Content Include="styles\images\table01\tbl_hori_color.png" />
+    <Content Include="styles\images\table01\tbl_vert.png" />
+    <Content Include="styles\images\table01\tbl_vert_color.png" />
+    <Content Include="styles\images\tab\tab_master.png" />
+    <Content Include="styles\images\tab\tab_type01.png" />
+    <Content Include="styles\images\tab\tab_type01_bg.png" />
+    <Content Include="styles\images\tab\tab_type01_over.png" />
+    <Content Include="styles\images\thumb_slider\thumb_slider.png" />
+    <Content Include="styles\images\tree\tree.png" />
+    <Content Include="styles\images\tree\tree_file.png" />
+    <Content Include="styles\images\tree\tree_folder.png" />
+    <Content Include="styles\images\tree\tree_folder_open.png" />
+    <Content Include="styles\images\tree\tree_line.png" />
+    <Content Include="styles\images\tree\tree_minus.png" />
+    <Content Include="styles\images\tree\tree_noicon.png" />
+    <Content Include="styles\images\tree\tree_plus.png" />
+    <Content Include="styles\images\tree\tree_user.png" />
+    <Content Include="styles\images\unified_srch\unified_srch.png" />
+    <Content Include="styles\images\unified_srch\unified_srch_line.gif" />
+    <Content Include="styles\js\common.js" />
+    <Content Include="styles\js\css.browser.detect.js" />
+    <Content Include="styles\js\fadeSlideShow.js" />
+    <Content Include="styles\js\jquery-1.9.1.min.js" />
+    <Content Include="styles\js\jquery-ui.min.js" />
+    <Content Include="styles\js\jquery.flexslider-min.js" />
+    <Content Include="styles\js\jquery.form.js" />
+    <Content Include="styles\js\jquery.ui.js" />
+    <Content Include="styles\js\jssor.core.js" />
+    <Content Include="styles\js\jssor.slider.js" />
+    <Content Include="styles\js\jssor.utils.js" />
+    <Content Include="styles\js\ScrollableGridPlugin.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="default.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Biz.cs" />
+    <Compile Include="Dac.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62776</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62776/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

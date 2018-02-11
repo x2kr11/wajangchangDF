@@ -1,0 +1,69 @@
+/**/
+.main_wrap{min-width:1180px!important;/* max-width:1580px;*/ height:100%; margin:0px auto; position:relative; overflow:auto;box-sizing:border-box;}
+.main_wrap *{box-sizing:border-box;}
+.main_wrap #lay_header{position:absolute; left:0; top:0px; right:0; height:110px; background:#fff;}
+
+.main_con{width:100%;  max-width:1580px; height:100%; margin: 10px auto; position:relative;}
+.main_con .visual{position:absolute; left:0; top:0; width:400px; height:495px; border:1px solid #ececec; background:#fff;}
+.main_con .visual{background:url(../images/main/img_visual.jpg) center no-repeat;}
+.main_con .contents{width:auto; margin-left:420px; margin-right:260px;}
+.main_right{position:absolute; right:0; top:0; bottom:0; width:240px; background:#f7f7fa; border:1px solid #ececec; padding:10px;}
+
+.main_wrap li{font-size:13px;}
+
+.main_section{border:1px solid #ececec; width:100%; padding:15px 15px 10px 15px; margin-top:10px; position:relative;}
+.main_section h1{font-size:16px; font-weight:500; color:#000;}
+.main_section .btn_more{width:16px; height:16px; display:inline-block; background:url(../images/main/bullet_more.png) no-repeat; font-size:0; vertical-align:top; margin-left:5px;}
+
+.notice{height:173px;}
+.main_notice{margin:15px 0 0 0; width:100%; display:table; table-layout:fixed;}
+.main_notice li{display:table-row;}
+.main_notice div.title{display:table-cell; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; word-wrap:normal; background:url(../images/main/bullet_notice.png) 0 6px no-repeat; padding-left:10px; padding-bottom:7px;}
+.main_notice div.title a:hover{color:#fd6901;}
+.main_notice div.date{/*position:absolute; right:0; width:80px; text-align:center;*/ display:table-cell; width:17%; text-align:right; padding-bottom:7px;}
+
+.attendance{height:131px;}
+.main_attendance{width:100%; margin:10px 0 0 0; display:table; table-layout:fixed;}
+.main_attendance li{display:table-row;}
+.main_attendance div{display:table-cell; vertical-align:middle; padding:3px 0;}
+.main_attendance div.name{width:40%; background:url(../images/main/bullet_user.png) left 0px no-repeat; padding-left:26px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; word-wrap:normal;}
+.main_attendance div.period{width:34%; text-align:center;}
+.main_attendance div.type{width:28%; text-align:right;}
+.main_attendance span{border-radius:2px; display:inline-block; width:100px; font-size:11px; color:#fff; text-align:center; padding-top:2px; padding-bottom:2px;}
+.main_attendance .leave{background:#e0002a;}
+.main_attendance .edu{background:#269fb0;}
+.main_attendance .biz{background:#f47726;}
+
+.main_leaveWrap{display:table; width:100%;margin:10px 0 0 0; height:151px;}
+.main_leaveWrap .leave_row{display:table-row;}
+.main_leaveWrap .left{display:table-cell; width:49%; vertical-align:top; border:1px solid #ececec; padding:15px;}
+.main_leaveWrap .right{display:table-cell; width:49%; vertical-align:top; border:1px solid #ececec; padding:15px;}
+.main_leaveWrap h1{font-size:16px; font-weight:500; color:#000;}
+.main_leaveWrap .empty{width:auto; font-size:0; vertical-align:top;}
+.main_leaveWrap .date{background:url(../images/main/bg_leave.png) no-repeat; width:88px; height:80px; margin:5px auto; text-align:center; font-size:34px; font-weight:500; line-height:100px;}
+.main_leaveWrap p{height:33px; text-align:center;}
+.main_leaveWrap .red{color:#ea002c;}
+.main_leaveWrap .orange{color:#f47726;}
+
+.main_right hr{border:none; border-top:1px solid #ececec; font-size:0; margin:15px auto; width:210px;}
+
+.user_info .photo{width:110px; height:110px; overflow:hidden; border-radius:50%; margin:10px auto;}
+.user_info .photo img{width:100%;}
+.user_info .info{width:100%; margin:0 auto; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; word-wrap:normal;}
+.user_info .info span{display:inline-block; font-size:14px; color:#000;}
+
+.team{margin:15px auto;}
+.team dl{float:left; margin:0 5px;}
+.team dt{clear:both; float:left; color:#767676; width:65px; padding:2px 6px;}
+.team dd{float:left; margin:2px 0px; color:#000; font-weight:500; width:143px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; word-wrap:normal;}
+.team:after{clear:both; display:block; content:'';}
+
+.birthday{margin:15px auto; width:100%; position:relative;}
+.birthday .tit{height:48px; background:url(../images/main/bg_birthday.png) 10px top no-repeat; padding-left:60px;}
+.birthday .tit .title{color:#000; letter-spacing:4px; font-weight:500; font-size:15px; padding-top:5px;}
+.birthday .tit .sub{color:#999; font-style:italic; font-weight:200; font-size:13px;}
+.birthday .box{margin-top:10px; border:1px solid #ececec; width:100%; height:145px; padding:15px; overflow-y:auto; overflow-x:hidden; background:#fff;}
+.birthday .box ul{display:table; width:100%;}
+.birthday .box li{background:url(../images/main/bullet_birth.png) no-repeat; display:table-row;}
+.birthday .box .name{display:table-cell; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;  width:120px; max-width:120px; line-height:16px; padding-left:18px; padding-bottom:8px; vertical-align:middle;}
+.birthday .box .day{display:table-cell; line-height:16px; padding-bottom:8px; text-align:right; vertical-align:middle;}
