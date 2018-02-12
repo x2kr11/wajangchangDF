@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
 using System.Data.SqlClient;
+using System.Collections;
 
 namespace WebApplication2
 {
@@ -20,7 +21,11 @@ namespace WebApplication2
         private string cacId;
         private string[] skuKai = { "스쿠님카이요","스쿠님게일요","독품은스쿠","류탄장전스쿠","귀신소환스쿠","루이즈스쿠","어둠사제스쿠","암흑기사스쿠","빙인파동스쿠","로드오브스쿠","소마스쿠"
                                     ,"심쿵스쿠","크림슨스쿠","절터는스쿠님","스쿠님용축요","스쿠님샷건요"};
+        private string[] skuFiori = {"Fiori","스쿠소마","Scuderia","꾸우우욱","철컹철컹스쿠","스쿠심판관","스쿠홀릭","스쿠비두","스쿠넘약해양","파동빙인스쿠","메카넘약해양","스쿠님카이좀","스쿠딘","LOUVER" };
+        private string[] skuXian = { "시성채", "네이팜스쿠", "그라시아스쿠", "스택오버", "디멘션스쿠", "기사님축이요", "축복앤스쿠", "Publisher", "GlobalCool", "후이아이", "DeadSet", "참조주소" };
+        private string[] skuLunch = { "글로리페이스", "불타는호박", "일기당백", "금삼겹", "긴그림자", "정식요원", "점프공사류탄", "버프밀땅녀", "이단심판스쿠", "각명관", "중년샷건간지", "장로드래곤", "봉사하는무녀","총검쓰는스쿠","버프는에반젤" };
         private string[] skuKaiID = new string[16];
+        private ArrayList arrayCacID = new ArrayList();
         private int _skuCount = 1;
         string dbConnect = "server = 118.37.235.181; uid=sku; pwd = tmzn; database = wajangchang";
         //d9ba8ef7552d6165e6e8cf6388967571 = 독품은스쿠
@@ -32,9 +37,9 @@ namespace WebApplication2
             if (!IsPostBack)
             {
                 txtName.Text = "독품은스쿠";
-                getCacId();
-                getItemList();
-                getBoosterList();
+                GetCacId();
+                GetItemList();
+                GetBoosterList();
             }
 
         }
@@ -45,29 +50,51 @@ namespace WebApplication2
 
         protected void btnSku_Click(object sender, EventArgs e)
         {
-            getCacIdArray();
-            getItemList(skuKaiID);
-            getBoosterList(skuKaiID);
+            ArrayList ID = new ArrayList();
+            GetCacIdArray(skuKai);
+            GetItemList(arrayCacID);
+            GetBoosterList(arrayCacID);
+        }
+
+        protected void btnFiori_Click(object sender, EventArgs e)
+        {
+            ArrayList arrayFioriID = new ArrayList();
+            arrayFioriID = GetCacIdArray(skuFiori);
+            GetItemList(arrayFioriID);
+            GetBoosterList(arrayFioriID);
+        }
+
+        protected void btnXian_Click(object sender, EventArgs e)
+        {
+            GetCacIdArray(skuXian);
+            GetItemList(arrayCacID);
+            GetBoosterList(arrayCacID);
+        }
+
+        protected void btnLunch_Click(object sender, EventArgs e)
+        {
+            GetCacIdArray(skuLunch);
+            GetItemList(arrayCacID);
+            GetBoosterList(arrayCacID);
         }
 
 
         protected void btnGetDate_Click(object sender, EventArgs e)
         {
-            getCacId();
-            getItemList();
-            getBoosterList();
+            GetCacId();
+            GetItemList();
+            GetBoosterList();
         }
 
         protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvList.PageIndex = e.NewPageIndex;
-            getCacIdArray();
-            getItemList(skuKaiID);
+            GetItemList(arrayCacID);
         }
         #endregion
 
         #region #UI 메소드
-        private JObject getDfJson(string url)
+        private JObject GetDfJson(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "text/json";
@@ -80,29 +107,30 @@ namespace WebApplication2
             return Json;
         }
 
-        private void getCacIdArray()
+        private ArrayList GetCacIdArray(string[] cacNM)
         {
-            for (int i = 0; i < skuKai.Length; i++)
+            for (int i = 0; i < cacNM.Length; i++)
             {
-                string url = "https://api.neople.co.kr/df/servers/cain/characters?characterName=" + skuKai[i] + "&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
-                JObject dfJson = getDfJson(url);
+                string url = "https://api.neople.co.kr/df/servers/cain/characters?characterName=" + cacNM[i] + "&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
+                JObject dfJson = GetDfJson(url);
                 JToken dfJson2 = JToken.FromObject(dfJson["rows"]);
-                skuKaiID[i] = dfJson2[0]["characterId"].ToString();
+                arrayCacID.Add(dfJson2[0]["characterId"].ToString());
             }
+            return arrayCacID;
         }
 
-        private void getCacId()
+        private void GetCacId()
         {
             string url = "https://api.neople.co.kr/df/servers/cain/characters?characterName=" + txtName.Text + "&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
-            JObject dfJson = getDfJson(url);
+            JObject dfJson = GetDfJson(url);
             JToken dfJson2 = JToken.FromObject(dfJson["rows"]);
             cacId = dfJson2[0]["characterId"].ToString();
         }
 
-        private void getBoosterList()
+        private void GetBoosterList()
         {
             string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId + "/timeline?limit=10&code=501&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
-            JObject dfJson = getDfJson(url);
+            JObject dfJson = GetDfJson(url);
             JToken dfJson2 = JToken.FromObject(dfJson["timeline"]["rows"]);
             JArray items = (JArray)dfJson["timeline"]["rows"];
             int length = items.Count;
@@ -130,9 +158,8 @@ namespace WebApplication2
             gvList2.DataBind();
         }
 
-
-        private void getBoosterList(string[] cacId)
-        {            
+        private void GetBoosterList(ArrayList cacId)
+        {
             DataTable dt = new DataTable();
             DataRow dr = null;
 
@@ -143,12 +170,12 @@ namespace WebApplication2
             dt.Columns.Add(new DataColumn("itemName", typeof(string)));
             dt.Columns.Add(new DataColumn("booster", typeof(string)));
 
-            for (int i = 0; i < cacId.Length; i++)
+            for (int i = 0; i < cacId.Count; i++)
             {
-                string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId[i] + "/timeline?limit=10&code=501&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
-                JObject dfJson = getDfJson(url);
+                string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId[i].ToString() + "/timeline?limit=10&code=501&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
+                JObject dfJson = GetDfJson(url);
                 JToken dfJson2 = JToken.FromObject(dfJson["timeline"]["rows"]);
-                JArray items = (JArray)dfJson["timeline"]["rows"];              
+                JArray items = (JArray)dfJson["timeline"]["rows"];
                 int length = items.Count;
 
                 for (int j = 0; j < length; j++)
@@ -164,10 +191,44 @@ namespace WebApplication2
             gvList2.DataBind();
         }
 
-        private void getItemList()
+
+        //private void GetBoosterList(string[] cacId)
+        //{            
+        //    DataTable dt = new DataTable();
+        //    DataRow dr = null;
+
+        //    dt.Columns.Add(new DataColumn("characterName", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("name", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("date", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("itemId", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("itemName", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("booster", typeof(string)));
+
+        //    for (int i = 0; i < cacId.Length; i++)
+        //    {
+        //        string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId[i] + "/timeline?limit=10&code=501&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
+        //        JObject dfJson = GetDfJson(url);
+        //        JToken dfJson2 = JToken.FromObject(dfJson["timeline"]["rows"]);
+        //        JArray items = (JArray)dfJson["timeline"]["rows"];              
+        //        int length = items.Count;
+
+        //        for (int j = 0; j < length; j++)
+        //        {
+        //            dr = dt.NewRow();
+        //            dr.ItemArray = new Object[] { dfJson["characterName"], dfJson2[j]["name"], dfJson2[j]["date"], dfJson2[j]["data"]["itemId"], dfJson2[j]["data"]["itemName"], dfJson2[j]["data"]["booster"] };
+        //            dt.Rows.Add(dr);
+        //        }
+        //    }
+        //    dt.DefaultView.Sort = "date DESC";
+        //    gvCount2.Text = dt.Rows.Count.ToString();
+        //    gvList2.DataSource = dt;
+        //    gvList2.DataBind();
+        //}
+
+        private void GetItemList()
         {
             string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId + "/timeline?limit=10&code=505&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
-            JObject dfJson = getDfJson(url);
+            JObject dfJson = GetDfJson(url);
             JToken dfJson2 = JToken.FromObject(dfJson["timeline"]["rows"]);
             JArray items = (JArray)dfJson["timeline"]["rows"];
             int length = items.Count;
@@ -197,11 +258,11 @@ namespace WebApplication2
             gvList.DataBind();
         }
 
-        private void getItemList(string[] cacId)
-        {            
+        private void GetItemList(ArrayList cacID)
+        {
             DataTable dt = new DataTable();
             DataRow dr = null;
-            
+
             dt.Columns.Add(new DataColumn("characterName", typeof(string)));
             dt.Columns.Add(new DataColumn("itemId", typeof(string)));
             dt.Columns.Add(new DataColumn("itemName", typeof(string)));
@@ -210,15 +271,14 @@ namespace WebApplication2
             dt.Columns.Add(new DataColumn("channelNo", typeof(string)));
             dt.Columns.Add(new DataColumn("dungeonName", typeof(string)));
 
-
-            for (int i = 0; i < cacId.Length; i++)
+            for(int i = 0; i < cacID.Count; i++)
             {
-                string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId[i] + "/timeline?limit=10&code=505&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
-                JObject dfJson = getDfJson(url);
+                string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacID[0].ToString() + "/timeline?limit=10&code=505&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
+                JObject dfJson = GetDfJson(url);
                 JToken dfJson2 = JToken.FromObject(dfJson["timeline"]["rows"]);
                 JArray items = (JArray)dfJson["timeline"]["rows"];
                 int length = items.Count;
-                
+
                 for (int j = 0; j < length; j++)
                 {
                     dr = dt.NewRow();
@@ -230,14 +290,50 @@ namespace WebApplication2
             dt.DefaultView.Sort = "date DESC";
             gvCount.Text = dt.Rows.Count.ToString();
             gvList.DataSource = dt;
-            gvList.DataBind();
+            gvList.DataBind();        
         }
+
+        //private void getItemList(string[] cacId)
+        //{            
+        //    DataTable dt = new DataTable();
+        //    DataRow dr = null;
+            
+        //    dt.Columns.Add(new DataColumn("characterName", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("itemId", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("itemName", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("date", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("channelName", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("channelNo", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("dungeonName", typeof(string)));
+
+
+        //    for (int i = 0; i < cacId.Length; i++)
+        //    {
+        //        string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId[i] + "/timeline?limit=10&code=505&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
+        //        JObject dfJson = getDfJson(url);
+        //        JToken dfJson2 = JToken.FromObject(dfJson["timeline"]["rows"]);
+        //        JArray items = (JArray)dfJson["timeline"]["rows"];
+        //        int length = items.Count;
+                
+        //        for (int j = 0; j < length; j++)
+        //        {
+        //            dr = dt.NewRow();
+        //            dr.ItemArray = new Object[] {dfJson["characterName"],dfJson2[j]["data"]["itemId"],dfJson2[j]["data"]["itemName"], dfJson2[j]["date"],dfJson2[j]["data"]["channelName"],dfJson2[j]["data"]["channelNo"]
+        //                                     ,dfJson2[j]["data"]["dungeonName"]};
+        //            dt.Rows.Add(dr);
+        //        }
+        //    }
+        //    dt.DefaultView.Sort = "date DESC";
+        //    gvCount.Text = dt.Rows.Count.ToString();
+        //    gvList.DataSource = dt;
+        //    gvList.DataBind();
+        //}
 
         /// <summary>
         /// character_info 테이블 Select
         /// </summary>
         /// <returns></returns>
-        public DataSet getInfo()
+        public DataSet GetInfo()
         {
             DataSet ds = new DataSet();
 
@@ -256,7 +352,8 @@ namespace WebApplication2
             conn.Close();
             return ds;
         }
+
+
         #endregion
-      
     }
 }

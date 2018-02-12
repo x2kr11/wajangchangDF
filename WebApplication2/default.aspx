@@ -21,33 +21,32 @@
     <script type="text/javascript" src="/styles/js/jquery.form.js"></script>
     <script type="text/javascript" src="/styles/js/jquery.ui.js"></script>
     <style type="text/css">
-    body
-    {
-        font-family: Arial;
-        font-size: 10pt;
-    }
-    .GridPager a, .GridPager span
-    {
-        display: block;
-        height: 15px;
-        width: 15px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-    }
-    .GridPager a
-    {
-        background-color: #f5f5f5;
-        color: #969696;
-        border: 1px solid #969696;
-    }
-    .GridPager span
-    {
-        background-color: #A1DCF2;
-        color: #000;
-        border: 1px solid #3AC0F2;
-    }
-</style>
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .GridPager a, .GridPager span {
+            display: block;
+            height: 15px;
+            width: 15px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .GridPager a {
+            background-color: #f5f5f5;
+            color: #969696;
+            border: 1px solid #969696;
+        }
+
+        .GridPager span {
+            background-color: #A1DCF2;
+            color: #000;
+            border: 1px solid #3AC0F2;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -56,6 +55,21 @@
                 <tr>
                     <td class="tit_area">
                         <div class="tit">획득 목록</div>
+                    </td>
+                    <td class="btn_area">
+                        <!-- 버튼 추가-->
+                        <asp:LinkButton ID="btnSku" runat="server" OnClick="btnSku_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <span css="txt">skuSearch</span>
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnFiori" runat="server" OnClick="btnFiori_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <span css="txt">FioriSearch</span>
+                        </asp:LinkButton>
+                         <asp:LinkButton ID="btnXian" runat="server" OnClick="btnXian_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <span css="txt">XianSearch</span>
+                        </asp:LinkButton>
+                         <asp:LinkButton ID="btnLunch" runat="server" OnClick="btnLunch_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <span css="txt">LunchSearch</span>
+                        </asp:LinkButton>
                     </td>
                 </tr>
             </table>
@@ -84,10 +98,6 @@
                     <asp:LinkButton ID="btnSearch" runat="server" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">       
                             <span css="txt">Search</span>
                     </asp:LinkButton>
-                    <asp:LinkButton ID="btnSku" runat="server" OnClick="btnSku_Click" CssClass="btn_txt btn_srch btn_color_a">
-                        <span css="txt">skuSearch</span>
-                    </asp:LinkButton>
-
                 </div>
             </div>
             <!--// Search-->
@@ -108,15 +118,15 @@
             </div>
             <!-- //Sub Title -->
             <!-- Board List -->
-            <div class="board_list" style="margin-bottom:10px">
+            <div class="board_list" style="margin-bottom: 10px">
                 <asp:GridView ID="gvList" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="10" OnDataBound="gvList_DataBound" OnPageIndexChanging="gvList_PageIndexChanging" PageIndex="1">
                     <HeaderStyle CssClass="board_list_row" />
                     <RowStyle CssClass="board_list_row" />
-                    <EmptyDataRowStyle CssClass="empty" /> 
-                    <PagerStyle HorizontalAlign = "Right" CssClass = "GridPager" />
-                    <Columns>                                   
+                    <EmptyDataRowStyle CssClass="empty" />
+                    <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
+                    <Columns>
 
-                         <asp:TemplateField>
+                        <asp:TemplateField>
                             <HeaderStyle CssClass="board_list_head" Width="5%" />
                             <HeaderTemplate>
                                 characterName
@@ -181,10 +191,10 @@
                                 <%# Eval("dungeonName") %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                    </Columns>                
-                </asp:GridView>           
+                    </Columns>
+                </asp:GridView>
             </div>
-            
+
             <!-- Sub Title -->
             <div class="opt_tit">
                 <div class="opt_tit_left">
@@ -203,12 +213,12 @@
             <!-- //Sub Title -->
             <!-- Board List -->
             <div class="board_list">
-                <asp:GridView ID="gvList2" runat="server"  AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0">
+                <asp:GridView ID="gvList2" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0">
                     <HeaderStyle CssClass="board_list_row" />
                     <RowStyle CssClass="board_list_row" />
                     <EmptyDataRowStyle CssClass="empty" />
                     <Columns>
-                         <asp:TemplateField>
+                        <asp:TemplateField>
                             <HeaderStyle CssClass="board_list_head" Width="5%" />
                             <HeaderTemplate>
                                 characterName
@@ -274,7 +284,7 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
-                </asp:GridView>                
+                </asp:GridView>
             </div>
         </div>
     </form>
