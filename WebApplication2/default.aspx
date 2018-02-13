@@ -57,7 +57,7 @@
                         <div class="tit">획득 목록</div>
                     </td>
                     <td class="btn_area">
-                        <!-- 버튼 추가-->
+                        <!-- 버튼 추가!-->
                         <asp:LinkButton ID="btnSku" runat="server" OnClick="btnSku_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">skuSearch</span>
                         </asp:LinkButton>
