@@ -47,6 +47,12 @@
             border: 1px solid #3AC0F2;
         }
     </style>
+    <script type="text/javascript">
+        function btnFlag_Click(Flag) {
+            $("#<%= hidFlag.ClientID%>").val(Flag);           
+            return true;
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -58,21 +64,22 @@
                     </td>
                     <td class="btn_area">
                         <!-- 버튼 추가!-->
-                        <asp:LinkButton ID="btnSku" runat="server" OnClick="btnSku_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnSku" runat="server" OnclientClick="return btnFlag_Click('Sku')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">skuSearch</span>
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnFiori" runat="server" OnClick="btnFiori_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnFiori" runat="server" OnclientClick="return btnFlag_Click('Fiori')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">FioriSearch</span>
                         </asp:LinkButton>
-                         <asp:LinkButton ID="btnXian" runat="server" OnClick="btnXian_Click" CssClass="btn_txt btn_srch btn_color_a">
+                         <asp:LinkButton ID="btnXian" runat="server" OnclientClick="return btnFlag_Click('Xian')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">XianSearch</span>
                         </asp:LinkButton>
-                         <asp:LinkButton ID="btnLunch" runat="server" OnClick="btnLunch_Click" CssClass="btn_txt btn_srch btn_color_a">
+                         <asp:LinkButton ID="btnLunch" runat="server" OnclientClick="return btnFlag_Click('Lunch')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">LunchSearch</span>
-                        </asp:LinkButton>
+                        </asp:LinkButton>   
                     </td>
                 </tr>
             </table>
+            <asp:HiddenField ID="hidFlag" runat="server" />
             <!-- //Page Title -->
             <!-- Search-->
             <div class="srch_type01 skin01">
