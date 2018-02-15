@@ -25,6 +25,7 @@ namespace WebApplication2.Library
             StreamReader readStream = new StreamReader(recvStream, Encoding.GetEncoding("utf-8"));
             string json = readStream.ReadToEnd();
             JObject Json = JObject.Parse(json);
+            response.Close();
             return Json;
         }
 
