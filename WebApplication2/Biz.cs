@@ -16,5 +16,13 @@ namespace WebApplication2
             ds = wDac.GetContentLog(ht);
             return ds;
         }
+
+        public DataSet GetCacIdList(Hashtable ht)
+        {
+            Dac wDac = new Dac();
+            DataSet ds = new DataSet();
+            ds = wDac.GetCacIdList(ht);
+            return ds;
+        }
     }
 }

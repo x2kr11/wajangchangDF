@@ -76,6 +76,9 @@
                         <asp:LinkButton ID="btnLunch" runat="server" OnClientClick="return btnFlag_Click('Lunch')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">LunchSearch</span>
                         </asp:LinkButton>
+                         <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn_txt btn_srch btn_color_a" PostBackUrl="~/InsertID.aspx">
+                        <span css="txt">캐릭터 등록</span>
+                        </asp:LinkButton>
                     </td>
                 </tr>
             </table>

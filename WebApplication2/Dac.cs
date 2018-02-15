@@ -13,12 +13,12 @@ namespace WebApplication2
     {
         #region 전역변수
         string ConnectionString = ConfigurationManager.ConnectionStrings["wajangchang"].ConnectionString;
-        public SqlConnection dbConn;
-        SqlDataReader Sdr;
+        public SqlConnection dbConn;        
         #endregion
 
         #region 프로시저 / SQL
         protected readonly string UP_CMM_CONTENT_L = "UP_CMM_Content_L";
+        protected readonly string UP_CMM_CACID_L = "Up_CMM_CacID_L";
         #endregion
 
         public SqlConnection getConn()
@@ -34,6 +34,19 @@ namespace WebApplication2
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@adventure_NM", ht["adventure_NM"]);
             SqlDataAdapter da = new SqlDataAdapter(cmd);            
+            dbConn.Open();
+            DataSet ds = new DataSet();
+            da.Fill(ds, "select");
+            dbConn.Close();
+            return ds;
+        }
+
+        public DataSet GetCacIdList(Hashtable ht)
+        {
+            SqlCommand cmd = new SqlCommand(UP_CMM_CACID_L, getConn());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cac_Id", ht["cac_Id"]);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
             dbConn.Open();
             DataSet ds = new DataSet();
             da.Fill(ds, "select");

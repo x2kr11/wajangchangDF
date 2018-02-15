@@ -72,7 +72,7 @@ namespace WebApplication2
         }
 
         //검색한 캐릭터에 대해 정보가 없으면 data insert 처리(log를 수집하기 위함)
-        private void CachingCharacter(string CharacterName)
+        protected void CachingCharacter(string CharacterName)
         {
             string CharacterID = Library.Network.GetCharacterID(CharacterName);
 

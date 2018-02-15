@@ -71,6 +71,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="GuildRanking.aspx" />
+    <Content Include="InsertID.aspx" />
     <Content Include="styles\font\Roboto-Bold.otf" />
     <Content Include="styles\font\Roboto-Bold.woff" />
     <Content Include="styles\font\Roboto-Bold.woff2" />
@@ -281,6 +282,13 @@
     </Compile>
     <Compile Include="GuildRanking.aspx.designer.cs">
       <DependentUpon>GuildRanking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InsertID.aspx.cs">
+      <DependentUpon>InsertID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertID.aspx.designer.cs">
+      <DependentUpon>InsertID.aspx</DependentUpon>
     </Compile>
     <Compile Include="Library\Network.cs" />
     <Compile Include="Library\Database.cs" />

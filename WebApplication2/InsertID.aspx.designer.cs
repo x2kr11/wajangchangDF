@@ -10,7 +10,7 @@
 namespace WebApplication2 {
     
     
-    public partial class WebForm1 {
+    public partial class InsertID {
         
         /// <summary>
         /// form1 컨트롤입니다.
@@ -22,58 +22,13 @@ namespace WebApplication2 {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// btnSku 컨트롤입니다.
+        /// btnList 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSku;
-        
-        /// <summary>
-        /// btnFiori 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnFiori;
-        
-        /// <summary>
-        /// btnXian 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnXian;
-        
-        /// <summary>
-        /// btnLunch 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLunch;
-        
-        /// <summary>
-        /// btnInsert 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnInsert;
-        
-        /// <summary>
-        /// hidFlag 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidFlag;
+        protected global::System.Web.UI.WebControls.LinkButton btnList;
         
         /// <summary>
         /// ddlCondition 컨트롤입니다.
@@ -112,30 +67,12 @@ namespace WebApplication2 {
         protected global::System.Web.UI.WebControls.Literal gvCount;
         
         /// <summary>
-        /// gvList 컨트롤입니다.
+        /// gvCacList 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvList;
-        
-        /// <summary>
-        /// gvCount2 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal gvCount2;
-        
-        /// <summary>
-        /// gvList2 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvList2;
+        protected global::System.Web.UI.WebControls.GridView gvCacList;
     }
 }
