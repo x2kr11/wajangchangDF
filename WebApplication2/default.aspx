@@ -49,7 +49,7 @@
     </style>
     <script type="text/javascript">
         function btnFlag_Click(Flag) {
-            $("#<%= hidFlag.ClientID%>").val(Flag);           
+            $("#<%= hidFlag.ClientID%>").val(Flag);
             return true;
         }
     </script>
@@ -64,18 +64,18 @@
                     </td>
                     <td class="btn_area">
                         <!-- 버튼 추가!-->
-                        <asp:LinkButton ID="btnSku" runat="server" OnclientClick="return btnFlag_Click('Sku')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnSku" runat="server" OnClientClick="return btnFlag_Click('Sku')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">skuSearch</span>
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnFiori" runat="server" OnclientClick="return btnFlag_Click('Fiori')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnFiori" runat="server" OnClientClick="return btnFlag_Click('Fiori')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">FioriSearch</span>
                         </asp:LinkButton>
-                         <asp:LinkButton ID="btnXian" runat="server" OnclientClick="return btnFlag_Click('Xian')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnXian" runat="server" OnClientClick="return btnFlag_Click('Xian')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">XianSearch</span>
                         </asp:LinkButton>
-                         <asp:LinkButton ID="btnLunch" runat="server" OnclientClick="return btnFlag_Click('Lunch')" OnClick="btnCac_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnLunch" runat="server" OnClientClick="return btnFlag_Click('Lunch')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">LunchSearch</span>
-                        </asp:LinkButton>   
+                        </asp:LinkButton>
                     </td>
                 </tr>
             </table>
@@ -90,10 +90,10 @@
                             <tr>
                                 <th scope="col" class="condition_t_head">Search Condition</th>
                                 <td class="condition_t_data" style="width: 120px;">
-                                    <select class="jqForm pct">
-                                        <option>캐릭터 이름</option>
+                                    <select class="jqForm pct" id="ddlCondition" runat="server">
+                                        <option value="cacNm">캐릭터 이름</option>
+                                        <option value="adventureNM">모험단 검색</option>
                                     </select>
-
                                 </td>
                                 <td class="condition_t_data noborder_left">
                                     <asp:TextBox ID="txtName" runat="server" CssClass="pct"></asp:TextBox></td>
@@ -102,7 +102,7 @@
                     </table>
                 </div>
                 <div class="btn_area">
-                    <asp:LinkButton ID="btnSearch" runat="server" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">       
+                    <asp:LinkButton ID="btnSearch" runat="server" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">       
                             <span css="txt">Search</span>
                     </asp:LinkButton>
                 </div>
@@ -220,10 +220,11 @@
             <!-- //Sub Title -->
             <!-- Board List -->
             <div class="board_list">
-                <asp:GridView ID="gvList2" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0">
+                <asp:GridView ID="gvList2" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvList2_PageIndexChanging" PageIndex="1">
                     <HeaderStyle CssClass="board_list_row" />
                     <RowStyle CssClass="board_list_row" />
                     <EmptyDataRowStyle CssClass="empty" />
+                    <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
                     <Columns>
                         <asp:TemplateField>
                             <HeaderStyle CssClass="board_list_head" Width="5%" />

@@ -67,10 +67,12 @@ namespace WebApplication2
             
         }
       
-        protected void btnCac_Click(object sender, EventArgs e)
-        {            
-            GetItemList(arrayCacID);
-            GetBoosterList(arrayCacID);           
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (ddlCondition.Value == "cacNm")
+                GetItemList(arrayCacID);
+            else
+                GetContentLog();
         }      
 
         protected void btnGetDate_Click(object sender, EventArgs e)
@@ -82,8 +84,14 @@ namespace WebApplication2
 
         protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvList.PageIndex = e.NewPageIndex;            
-            GetItemList(arrayCacID);
+            gvList.PageIndex = e.NewPageIndex;
+            GetContentLog();
+            //GetItemList(arrayCacID);
+        }
+        protected void gvList2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvList2.PageIndex = e.NewPageIndex;
+            GetContentLog();
         }
         #endregion
 
@@ -97,7 +105,7 @@ namespace WebApplication2
             Stream recvStream = response.GetResponseStream();
             StreamReader readStream = new StreamReader(recvStream, Encoding.GetEncoding("utf-8"));
             string json = readStream.ReadToEnd();
-            JObject Json = JObject.Parse(json);
+            JObject Json = JObject.Parse(json);            
             return Json;
         }
 
@@ -277,7 +285,56 @@ namespace WebApplication2
             return ds;
         }
 
+        /// <summary>
+        /// 모험단 지옥파티 아이템 리스트
+        /// </summary>
+        private void GetContentLog()
+        {
+            Hashtable ht = new Hashtable();
+            ht.Add("adventure_NM", txtName.Text);
 
-        #endregion
+            Biz wDac = new Biz();
+            DataSet ds =  wDac.GetContentLog(ht);
+
+            DataTable dt = ds.Tables[0];
+            DataTable dt2 = ds.Tables[1];
+
+            dt.Columns.Add(new DataColumn("itemId", typeof(string)));
+            dt.Columns.Add(new DataColumn("itemName", typeof(string)));
+            dt.Columns.Add(new DataColumn("channelName", typeof(string)));
+            dt.Columns.Add(new DataColumn("channelNo", typeof(string)));
+            dt.Columns.Add(new DataColumn("dungeonName", typeof(string)));
+
+            for(int i = 0; i<dt.Rows.Count; i++)
+            {
+                JToken dfJson = JToken.Parse(dt.Rows[i]["data"].ToString());
+                dt.Rows[i]["itemId"] = dfJson["itemId"];
+                dt.Rows[i]["itemName"] = dfJson["itemName"];
+                dt.Rows[i]["channelName"] = dfJson["channelName"];
+                dt.Rows[i]["channelNo"] = dfJson["channelNo"];
+                dt.Rows[i]["dungeonName"] = dfJson["dungeonName"];
+            }
+
+            dt2.Columns.Add(new DataColumn("itemId", typeof(string)));
+            dt2.Columns.Add(new DataColumn("itemName", typeof(string)));
+            dt2.Columns.Add(new DataColumn("booster", typeof(string)));
+
+            for (int i = 0; i < dt2.Rows.Count; i++)
+            {
+                JToken dfJson = JToken.Parse(dt2.Rows[i]["data"].ToString());
+                dt2.Rows[i]["itemId"] = dfJson["itemId"];
+                dt2.Rows[i]["itemName"] = dfJson["itemName"];
+                dt2.Rows[i]["booster"] = dfJson["booster"];
+            }
+
+            gvCount.Text = dt.Rows.Count.ToString();
+            gvList.DataSource = dt;
+            gvList.DataBind();
+
+            gvCount2.Text = dt.Rows.Count.ToString();
+            gvList2.DataSource = dt2;
+            gvList2.DataBind();
+        }
+        #endregion       
     }
 }
