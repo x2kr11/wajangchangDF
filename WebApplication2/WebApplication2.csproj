@@ -282,7 +282,6 @@
     <Compile Include="GuildRanking.aspx.designer.cs">
       <DependentUpon>GuildRanking.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Library\HashAlgorithm.cs" />
     <Compile Include="Library\Network.cs" />
     <Compile Include="Library\Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
