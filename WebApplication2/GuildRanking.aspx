@@ -11,6 +11,11 @@
     <form id="form1" runat="server">
         <div>
         </div>
+        <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        <p>
+            <asp:TextBox ID="TextBox2" runat="server" Height="448px" Width="1009px"></asp:TextBox>
+        </p>
     </form>
 </body>
 </html>
