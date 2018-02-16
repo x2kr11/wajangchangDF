@@ -59,8 +59,13 @@
         <div>
             <table class="page_tit">
                 <tr>
-                    <td class="tit_area">
-                        <div class="tit">획득 목록</div>
+                    <td class="tit_area">                       
+                        <div class="tit">획득 목록</div>                       
+                    </td>
+                    <td>
+                          <a href="http://developers.neople.co.kr" target="_blank">
+                            <img src="styles/images/loc_info/neopleAPI_Logo.png" alt="Neople 오픈 API" />
+                        </a>
                     </td>
                     <td class="btn_area">
                         <!-- 버튼 추가!-->
@@ -76,7 +81,7 @@
                         <asp:LinkButton ID="btnLunch" runat="server" OnClientClick="return btnFlag_Click('Lunch')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">LunchSearch</span>
                         </asp:LinkButton>
-                         <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn_txt btn_srch btn_color_a" PostBackUrl="~/InsertID.aspx">
+                        <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn_txt btn_srch btn_color_a" PostBackUrl="~/InsertID.aspx">
                         <span css="txt">캐릭터 등록</span>
                         </asp:LinkButton>
                     </td>

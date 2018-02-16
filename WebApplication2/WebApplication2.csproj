@@ -202,6 +202,7 @@
     <Content Include="styles\images\lnb\lnb_srch.png" />
     <Content Include="styles\images\loc_info\loc_info_basic.png" />
     <Content Include="styles\images\loc_info\loc_info_selective.png" />
+    <Content Include="styles\images\loc_info\neopleAPI_Logo.png" />
     <Content Include="styles\images\main\bg_birthday.png" />
     <Content Include="styles\images\main\bg_leave.png" />
     <Content Include="styles\images\main\bullet_birth.png" />
