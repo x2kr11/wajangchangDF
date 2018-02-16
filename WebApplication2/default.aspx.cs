@@ -21,9 +21,9 @@ namespace WebApplication2
         private string cacId;
         private string[] skuKai = { "스쿠님카이요","스쿠님게일요","독품은스쿠","류탄장전스쿠","귀신소환스쿠","루이즈스쿠","어둠사제스쿠","암흑기사스쿠","빙인파동스쿠","로드오브스쿠","소마스쿠"
                                     ,"심쿵스쿠","크림슨스쿠","절터는스쿠님","스쿠님용축요","스쿠님샷건요"};
-        private string[] skuFiori = {"Fiori","스쿠소마","Scuderia","꾸우우욱","철컹철컹스쿠","스쿠심판관","스쿠홀릭","스쿠비두","스쿠넘약해양","파동빙인스쿠","메카넘약해양","스쿠님카이좀","스쿠딘","LOUVER" };
+        private string[] skuFiori = { "Fiori", "스쿠소마", "Scuderia", "꾸우우욱", "철컹철컹스쿠", "스쿠심판관", "스쿠홀릭", "스쿠비두", "스쿠넘약해양", "파동빙인스쿠", "메카넘약해양", "스쿠님카이좀", "스쿠딘", "LOUVER" };
         private string[] skuXian = { "시성채", "네이팜스쿠", "그라시아스쿠", "스택오버", "디멘션스쿠", "기사님축이요", "축복앤스쿠", "Publisher", "GlobalCool", "후이아이", "DeadSet", "참조주소" };
-        private string[] skuLunch = { "글로리페이스", "불타는호박", "일기당백", "금삼겹", "긴그림자", "정식요원", "점프공사류탄", "버프밀땅녀", "이단심판스쿠", "각명관", "중년샷건간지", "장로드래곤", "봉사하는무녀","총검쓰는스쿠","버프는에반젤" };
+        private string[] skuLunch = { "글로리페이스", "불타는호박", "일기당백", "금삼겹", "긴그림자", "정식요원", "점프공사류탄", "버프밀땅녀", "이단심판스쿠", "각명관", "중년샷건간지", "장로드래곤", "봉사하는무녀", "총검쓰는스쿠", "버프는에반젤" };
         private string _strFlag;
         //private string[] strCacId = new string[];
         private ArrayList arrayCacID = new ArrayList();
@@ -36,7 +36,7 @@ namespace WebApplication2
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {               
+            {
                 txtName.Text = "독품은스쿠";
                 GetCacId();
                 GetItemList();
@@ -64,16 +64,20 @@ namespace WebApplication2
         }
         protected void gvList_DataBound(object sender, EventArgs e)
         {
-            
+
         }
-      
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             if (ddlCondition.Value == "cacNm")
-                GetItemList(arrayCacID);
+            {
+                GetCacId();
+                GetItemList();
+                GetBoosterList();
+            }
             else
                 GetContentLog();
-        }      
+        }
 
         protected void btnGetDate_Click(object sender, EventArgs e)
         {
@@ -105,7 +109,7 @@ namespace WebApplication2
             Stream recvStream = response.GetResponseStream();
             StreamReader readStream = new StreamReader(recvStream, Encoding.GetEncoding("utf-8"));
             string json = readStream.ReadToEnd();
-            JObject Json = JObject.Parse(json);            
+            JObject Json = JObject.Parse(json);
             return Json;
         }
 
@@ -204,7 +208,7 @@ namespace WebApplication2
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             DataRow dr = null;
-           
+
             dt.Columns.Add(new DataColumn("characterName", typeof(string)));
             dt.Columns.Add(new DataColumn("itemId", typeof(string)));
             dt.Columns.Add(new DataColumn("itemName", typeof(string)));
@@ -213,14 +217,14 @@ namespace WebApplication2
             dt.Columns.Add(new DataColumn("channelNo", typeof(string)));
             dt.Columns.Add(new DataColumn("dungeonName", typeof(string)));
 
-            for (int i = 0; i < length; i++,_skuCount++)
+            for (int i = 0; i < length; i++, _skuCount++)
             {
                 dr = dt.NewRow();
                 dr.ItemArray = new Object[] {dfJson["characterName"],dfJson2[i]["data"]["itemId"],dfJson2[i]["data"]["itemName"], dfJson2[i]["date"],dfJson2[i]["data"]["channelName"],dfJson2[i]["data"]["channelNo"]
                                              ,dfJson2[i]["data"]["dungeonName"]};
                 dt.Rows.Add(dr);
             }
-            
+
             gvCount.Text = length.ToString();
             gvList.DataSource = dt;
             gvList.DataBind();
@@ -239,7 +243,7 @@ namespace WebApplication2
             dt.Columns.Add(new DataColumn("channelNo", typeof(string)));
             dt.Columns.Add(new DataColumn("dungeonName", typeof(string)));
 
-            for(int i = 0; i < cacID.Count; i++)
+            for (int i = 0; i < cacID.Count; i++)
             {
                 string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacID[i].ToString() + "/timeline?limit=10&code=505&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
                 JObject dfJson = GetDfJson(url);
@@ -258,8 +262,8 @@ namespace WebApplication2
             dt.DefaultView.Sort = "date DESC";
             gvCount.Text = dt.Rows.Count.ToString();
             gvList.DataSource = dt;
-            gvList.DataBind();        
-        }     
+            gvList.DataBind();
+        }
 
         /// <summary>
         /// character_info 테이블 Select
@@ -275,7 +279,7 @@ namespace WebApplication2
 
             //sql 조회문
             string sql = "Select id,serverId,characterId,characterName,adventureName,quildId From character_info";
-            
+
             SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
 
             //조회한 결과를 dataset에 저장 후 리턴
@@ -294,7 +298,7 @@ namespace WebApplication2
             ht.Add("adventure_NM", txtName.Text);
 
             Biz wDac = new Biz();
-            DataSet ds =  wDac.GetContentLog(ht);
+            DataSet ds = wDac.GetContentLog(ht);
 
             DataTable dt = ds.Tables[0];
             DataTable dt2 = ds.Tables[1];
@@ -305,7 +309,7 @@ namespace WebApplication2
             dt.Columns.Add(new DataColumn("channelNo", typeof(string)));
             dt.Columns.Add(new DataColumn("dungeonName", typeof(string)));
 
-            for(int i = 0; i<dt.Rows.Count; i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 JToken dfJson = JToken.Parse(dt.Rows[i]["data"].ToString());
                 dt.Rows[i]["itemId"] = dfJson["itemId"];

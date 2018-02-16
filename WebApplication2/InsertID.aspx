@@ -55,7 +55,7 @@
             <table class="page_tit">
                 <tr>
                     <td class="tit_area">
-                        <div class="tit">획득 목록</div>
+                        <div class="tit">캐릭터 등록</div>
                     </td>
                     <td class="btn_area">
                         <!-- 버튼 추가!-->
