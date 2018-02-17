@@ -55,7 +55,7 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" defaultbutton="btnSearch">
         <div>
             <table class="page_tit">
                 <tr>
@@ -69,16 +69,16 @@
                     </td>
                     <td class="btn_area">
                         <!-- 버튼 추가!-->
-                        <asp:LinkButton ID="btnSku" runat="server" OnClientClick="return btnFlag_Click('Sku')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnSku" runat="server" OnClientClick="return btnFlag_Click('Sku')" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">skuSearch</span>
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnFiori" runat="server" OnClientClick="return btnFlag_Click('Fiori')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnFiori" runat="server" OnClientClick="return btnFlag_Click('Fiori')" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">FioriSearch</span>
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnXian" runat="server" OnClientClick="return btnFlag_Click('Xian')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnXian" runat="server" OnClientClick="return btnFlag_Click('Xian')" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">XianSearch</span>
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnLunch" runat="server" OnClientClick="return btnFlag_Click('Lunch')" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">
+                        <asp:LinkButton ID="btnLunch" runat="server" OnClientClick="return btnFlag_Click('Lunch')" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">LunchSearch</span>
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn_txt btn_srch btn_color_a" PostBackUrl="~/InsertID.aspx">
@@ -134,7 +134,7 @@
             <!-- //Sub Title -->
             <!-- Board List -->
             <div class="board_list" style="margin-bottom: 10px">
-                <asp:GridView ID="gvList" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="10" OnDataBound="gvList_DataBound" OnPageIndexChanging="gvList_PageIndexChanging" PageIndex="1">
+                <asp:GridView ID="gvList" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="10" OnDataBound="gvList_DataBound" OnPageIndexChanging="gvList_PageIndexChanging" PageIndex="0">
                     <HeaderStyle CssClass="board_list_row" />
                     <RowStyle CssClass="board_list_row" />
                     <EmptyDataRowStyle CssClass="empty" />
@@ -228,7 +228,7 @@
             <!-- //Sub Title -->
             <!-- Board List -->
             <div class="board_list">
-                <asp:GridView ID="gvList2" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvList2_PageIndexChanging" PageIndex="1">
+                <asp:GridView ID="gvList2" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvList2_PageIndexChanging" PageIndex="0">
                     <HeaderStyle CssClass="board_list_row" />
                     <RowStyle CssClass="board_list_row" />
                     <EmptyDataRowStyle CssClass="empty" />

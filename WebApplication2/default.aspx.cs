@@ -80,23 +80,36 @@ namespace WebApplication2
         }
 
         protected void btnGetDate_Click(object sender, EventArgs e)
-        {
-            GetCacId();
-            GetItemList();
-            GetBoosterList();
+        {            
+            GetItemList(arrayCacID);
+            GetBoosterList(arrayCacID);
         }
 
         protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvList.PageIndex = e.NewPageIndex;
-            GetContentLog();
+            if (ddlCondition.Value == "cacNm")
+            {
+                GetCacId();
+                GetItemList();
+                GetBoosterList();
+            }            
+            else
+                GetContentLog();
             //GetItemList(arrayCacID);
         }
         protected void gvList2_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvList2.PageIndex = e.NewPageIndex;
-            GetContentLog();
-        }
+            if (ddlCondition.Value == "cacNm")
+            {
+                GetCacId();
+                GetItemList();
+                GetBoosterList();
+            }
+            else
+                GetContentLog();
+        }       
         #endregion
 
         #region #UI 메소드
@@ -199,7 +212,7 @@ namespace WebApplication2
         }
         private void GetItemList()
         {
-            string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId + "/timeline?limit=10&code=505&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
+            string url = "https://api.neople.co.kr/df/servers/cain/characters/" + cacId + "/timeline?limit=100&code=505&apikey=7kfcmynokMoq1AQgKMTMQ9ZBtl5KwcKS";
             JObject dfJson = GetDfJson(url);
             JToken dfJson2 = JToken.FromObject(dfJson["timeline"]["rows"]);
             JArray items = (JArray)dfJson["timeline"]["rows"];
@@ -293,7 +306,7 @@ namespace WebApplication2
         /// 모험단 지옥파티 아이템 리스트
         /// </summary>
         private void GetContentLog()
-        {
+        {      
             Hashtable ht = new Hashtable();
             ht.Add("adventure_NM", txtName.Text);
 
