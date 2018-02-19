@@ -64,12 +64,8 @@ namespace WebApplication2
                     item.Text = drAdventureList[i]["adventureName"].ToString();
                     ddlGirin.Items.Add(item);
                 }
-                item = new ListItem();
-                item.Value = "ALL";
-                item.Text = "ALL";
-                item.Selected = true;
 
-                ddlGirin.Items.Insert(0, item);           
+                ddlGirin.Items.FindByText("스쿠").Selected = true;
             }
         }
 
