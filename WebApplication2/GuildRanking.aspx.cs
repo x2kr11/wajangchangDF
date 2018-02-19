@@ -11,6 +11,65 @@ namespace WebApplication2
 {
     public partial class GuildRanking : System.Web.UI.Page
     {
+        private interface TimelineQuery
+        {
+            string ToInsertQuery();
+        }
+
+        private struct TimelineHellEpic : TimelineQuery
+        {
+            string CharacterId;
+            string ItemId;
+            string ItemName;
+            string ChannelName;
+            Int16 ChannelNo;
+            string dungeonName;
+            string Date;
+
+            public TimelineHellEpic(string CharacterId_, JToken JsonData)
+            {
+                CharacterId = CharacterId_;
+                ItemId = JsonData["itemId"].ToString();
+                ItemName = JsonData["itemName"].ToString();
+                ChannelName = JsonData["channelName"].ToString();
+                ChannelNo = Int16.Parse(JsonData["channelNo"].ToString());
+                dungeonName = JsonData["dungeonName"].ToString();
+                Date = JsonData["date"].ToString();
+            }
+
+            public string ToInsertQuery()
+            {
+                System.Text.StringBuilder InsertQueryBuilder = new System.Text.StringBuilder();
+                InsertQueryBuilder.AppendFormat("('{0}', '{1}', '{2}', '{3}', {4}, '{5}', '{6}')", CharacterId, ItemId, ItemName, ChannelName, ChannelNo, dungeonName, Date);
+                return InsertQueryBuilder.ToString();
+            }
+        }
+
+        private struct TimelineSealedLock : TimelineQuery
+        {
+            string CharacterId;
+            string ItemId;
+            string ItemName;
+            bool Booster;
+            string Date;
+
+            public TimelineSealedLock(string CharacterId_, JToken JsonData)
+            {
+                CharacterId = CharacterId_;
+                ItemId = JsonData["itemId"].ToString();
+                ItemName = JsonData["itemName"].ToString();
+                Booster = JsonData["booster"].ToString() != "false";
+                Date = JsonData["date"].ToString();
+            }
+
+            public string ToInsertQuery()
+            {
+                System.Text.StringBuilder InsertQueryBuilder = new System.Text.StringBuilder();
+                InsertQueryBuilder.AppendFormat("('{0}', '{1}', '{2}', {3}, '{4}')", CharacterId, ItemId, ItemName, Booster ? 1 : 0, Date);
+                return InsertQueryBuilder.ToString();
+            }
+        }
+
         private struct TimelineData
         {
             string CharacterId;
@@ -44,12 +103,66 @@ namespace WebApplication2
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //TempFunction();
             RefreshCharacterIds();
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        //content_log 지우기전 잠시 동기화 호출 함수
+        private void TempFunction()
+        {
+            DataRowCollection Rows = Library.Database.Query("select * from content_log").Tables[0].Rows;
+            List<string> HellValues = new List<string>();
+            List<string> SealedLockValues = new List<string>();
+            foreach (DataRow Row in Rows)
+            {
+                int Code = Int32.Parse(Row["code"].ToString());
+                if (Code == 505)
+                {
+                    JObject DataJson = JObject.Parse(Row["data"].ToString());
+                    HellValues.Add(string.Format("('{0}', '{1}', '{2}', '{3}', {4}, '{5}', '{6}')", Row["characterId"], DataJson["itemId"], DataJson["itemName"], DataJson["channelName"], DataJson["channelNo"], DataJson["dungeonName"], Convert.ToDateTime(Row["date"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")));
+                }
+                else if (Code == 501)
+                {
+                    JObject DataJson = JObject.Parse(Row["data"].ToString());
+
+
+                    SealedLockValues.Add(string.Format("('{0}', '{1}', '{2}', {3}, '{4}')", Row["characterId"], DataJson["itemId"], DataJson["itemName"], DataJson["booster"].ToString() == "false" ? 0 : 1, Convert.ToDateTime(Row["date"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")));
+                }
+
+                if (HellValues.Count >= 1000)
+                {
+                    string ResultValues = HellValues.Aggregate(((i, j) => i + "," + j));
+                    //string ResultQuery = "insert into timeline_hell_epic(characterId, itemId, itemName, channelName, channelNo, dungeonName, date) Values " + ResultValues;
+                    Library.Database.Query("insert into timeline_hell_epic(characterId, itemId, itemName, channelName, channelNo, dungeonName, date) Values " + ResultValues);
+                    HellValues.Clear();
+                }
+
+                if (SealedLockValues.Count >= 1000)
+                {
+                    string ResultValues = SealedLockValues.Aggregate(((i, j) => i + "," + j));
+                    Library.Database.Query("insert into timeline_sealedlock(characterId, itemId, itemName, booster, date) Values " + ResultValues);
+                    SealedLockValues.Clear();
+                }
+            }
+
+            if (HellValues.Count > 0)
+            {
+                string ResultValues = HellValues.Aggregate(((i, j) => i + "," + j));
+                Library.Database.Query("insert into timeline_hell_epic(characterId, itemId, itemName, channelName, channelNo, dungeonName, date) Values " + ResultValues);
+                HellValues.Clear();
+            }
+
+            if (SealedLockValues.Count > 0)
+            {
+                string ResultValues = SealedLockValues.Aggregate(((i, j) => i + "," + j));
+                Library.Database.Query("insert into timeline_sealedlock(characterId, itemId, itemName, booster, date) Values " + ResultValues);
+                SealedLockValues.Clear();
+            }
         }
 
         //한국 던파 현재 시간기준 초기화된 날짜 및 시간 (목요일 새벽6시)
@@ -184,7 +297,9 @@ namespace WebApplication2
                 }
             }
             List<TimelineData> TimeLineDatas = new List<TimelineData>();
-            while(!string.IsNullOrEmpty(TimelineUrl))
+            List<string> TimeLineHellEpicValues = new List<string>();
+            List<string> TimeLineSealedLockValues = new List<string>();
+            while (!string.IsNullOrEmpty(TimelineUrl))
             {
                 JObject TimelineJsonData = Library.Network.GetDFJsonResult(TimelineUrl);
 
@@ -210,6 +325,8 @@ namespace WebApplication2
                             
 
                         TimeLineDatas.Add(LogData);
+                        TimeLineSealedLockValues.Add(new TimelineSealedLock(CharacterId, TimelineRowData).ToInsertQuery());
+                        TimeLineHellEpicValues.Add(new TimelineHellEpic(CharacterId, TimelineRowData).ToInsertQuery());
                         //InsertQueryBuilder.AppendFormat("('{0}', {1}, '{2}', '{3}', '{4}')", CharacterId, TimelineRowData["code"], TimelineRowData["name"], TimelineRowData["data"], TimelineRowData["date"]);
                     }
                 }
@@ -231,6 +348,19 @@ namespace WebApplication2
 
                 Library.Database.Query(InsertQueryBuilder.ToString());
             }
+
+            if(TimeLineHellEpicValues.Count > 0)
+            {
+                string ResultValues = TimeLineHellEpicValues.Aggregate(((i, j) => i + "," + j));
+                Library.Database.Query("insert into timeline_hell_epic(characterId, itemId, itemName, channelName, channelNo, dungeonName, date) values " + ResultValues);
+            }
+
+            if (TimeLineSealedLockValues.Count > 0)
+            {
+                string ResultValues = TimeLineSealedLockValues.Aggregate(((i, j) => i + "," + j));
+                Library.Database.Query("insert into timeline_hell_epic(characterId, itemId, itemName, booster, date) values " + ResultValues);
+            }
+
             
 
 
