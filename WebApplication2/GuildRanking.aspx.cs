@@ -60,7 +60,7 @@ namespace WebApplication2
                 CharacterId = CharacterId_;
                 ItemId = DataToken["itemId"].ToString();
                 ItemName = DataToken["itemName"].ToString();
-                Booster = DataToken["booster"].ToString() != "false";
+                Booster = DataToken.Value<bool>("booster");
                 Date = JsonData["date"].ToString();
             }
 
@@ -137,8 +137,8 @@ namespace WebApplication2
                 {
                     JObject DataJson = JObject.Parse(Row["data"].ToString());
 
-
-                    SealedLockValues.Add(string.Format("('{0}', '{1}', '{2}', {3}, '{4}')", Row["characterId"], DataJson["itemId"], DataJson["itemName"], DataJson["booster"].ToString() == "false" ? 0 : 1, Convert.ToDateTime(Row["date"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")));
+                    bool IsBooster = DataJson.Value<bool>("booster");
+                    SealedLockValues.Add(string.Format("('{0}', '{1}', '{2}', {3}, '{4}')", Row["characterId"], DataJson["itemId"], DataJson["itemName"], IsBooster ? 1 : 0, Convert.ToDateTime(Row["date"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")));
                 }
 
                 if (HellValues.Count >= 1000)
