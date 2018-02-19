@@ -18,7 +18,8 @@ namespace WebApplication2
 
         #region 프로시저 / SQL
         protected readonly string UP_CMM_CONTENT_L = "UP_CMM_Content_L";
-        protected readonly string UP_CMM_CACID_L = "Up_CMM_CacID_L";
+        protected readonly string UP_CMM_CACID_L = "UP_CMM_CacID_L";
+        protected readonly string UP_CMM_ADVENTURE_L = "UP_CMM_Adventure_L";
         #endregion
 
         public SqlConnection getConn()
@@ -27,7 +28,11 @@ namespace WebApplication2
             return dbConn;
         }
 
-
+        /// <summary>
+        /// ContentLog 조회
+        /// </summary>
+        /// <param name="ht"></param>
+        /// <returns></returns>
         public DataSet GetContentLog(Hashtable ht)
         {
             SqlCommand cmd = new SqlCommand(UP_CMM_CONTENT_L,getConn());
@@ -41,11 +46,32 @@ namespace WebApplication2
             return ds;
         }
 
+        /// <summary>
+        /// 캐릭터 리스트 조회
+        /// </summary>
+        /// <param name="ht"></param>
+        /// <returns></returns>
         public DataSet GetCacIdList(Hashtable ht)
         {
             SqlCommand cmd = new SqlCommand(UP_CMM_CACID_L, getConn());
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@cac_Id", ht["cac_Id"]);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            dbConn.Open();
+            DataSet ds = new DataSet();
+            da.Fill(ds, "select");
+            dbConn.Close();
+            return ds;
+        }
+
+        /// <summary>
+        /// 모험단 조회
+        /// </summary>
+        /// <returns></returns>
+        public DataSet GetAdventureList()
+        {
+            SqlCommand cmd = new SqlCommand(UP_CMM_ADVENTURE_L, getConn());
+            cmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             dbConn.Open();
             DataSet ds = new DataSet();

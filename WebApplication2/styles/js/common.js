@@ -209,8 +209,7 @@ strTitle    : 팝업 제목
 intWidth    : 팝업 넓이
 intHeight   : 팝업 높이
 -----------------------------------*/
-MostiPopup.ShowPopup = function (strUrl, strTitle, intWidth, intHeight) {
-
+MostiPopup.ShowPopup = function (strUrl, strTitle, intWidth, intHeight) { 
     //레이어 팝업의 위치를 화면 중앙으로 잡는다.
     var intTop = parseInt((document.body.clientHeight - intHeight) / 2);
     var intLeft = parseInt((document.body.clientWidth - intWidth) / 2);

@@ -20,6 +20,7 @@
     <script type="text/javascript" src="/styles/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/styles/js/jquery.form.js"></script>
     <script type="text/javascript" src="/styles/js/jquery.ui.js"></script>
+    <script type="text/javascript" src="/styles/js/common.js"></script>
     <style type="text/css">
         body {
             font-family: Arial;
@@ -52,6 +53,10 @@
             $("#<%= hidFlag.ClientID%>").val(Flag);
             return true;
         }
+        function btnGirin_Click() {            
+            MostiPopup.ShowPopup("DetailList.aspx", "기린 목록", 940, 420);
+            return false;
+        }
     </script>
 </head>
 <body>
@@ -59,11 +64,11 @@
         <div>
             <table class="page_tit">
                 <tr>
-                    <td class="tit_area">                       
-                        <div class="tit">획득 목록</div>                       
+                    <td class="tit_area">
+                        <div class="tit">획득 목록</div>
                     </td>
                     <td>
-                          <a href="http://developers.neople.co.kr" target="_blank">
+                        <a href="http://developers.neople.co.kr" target="_blank">
                             <img src="styles/images/loc_info/neopleAPI_Logo.png" alt="Neople 오픈 API" />
                         </a>
                     </td>
@@ -81,7 +86,10 @@
                         <asp:LinkButton ID="btnLunch" runat="server" OnClientClick="return btnFlag_Click('Lunch')" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">LunchSearch</span>
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn_txt btn_srch btn_color_a" PostBackUrl="~/InsertID.aspx">
+                        <asp:LinkButton ID="btnGirin" runat="server" CssClass="btn_txt btn_srch btn_color_b" OnClientClick="return btnGirin_Click()">
+                            <span css="txt">황홀, 3신기 검색</span>
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn_txt btn_srch btn_color_b" PostBackUrl="~/InsertID.aspx">
                         <span css="txt">캐릭터 등록</span>
                         </asp:LinkButton>
                     </td>
@@ -303,6 +311,27 @@
                 </asp:GridView>
             </div>
         </div>
+        <!-- Layer Popup -->
+        <div id="mw">
+            <div class="pop_bg"></div>
+            <div id="__layer_pop" class="pop_layer_s">
+                <div class="pop_tit_wrap">
+                    <h2 class="pop_tit" id="__layer_pop_title">Popup Title</h2>
+                    <a href="javascript:;" class="close_area">
+                        <span class="pop_layer_btn pop_layer_btn_close">
+                            <span class="blind">팝업 닫기</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="pop_con_fix" id="__layer_pop_content_body1">
+                    <div class="pop_con_area" id="__layer_pop_content_body2">
+                        <iframe id="__layer_pop_content_frame" name="__layer_pop_content_frame" style="width: 100%; border: 0px;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hidMenuId" name="hidMenuId" value=" " />
+        <!-- //Layer Popup -->
     </form>
 </body>
 </html>

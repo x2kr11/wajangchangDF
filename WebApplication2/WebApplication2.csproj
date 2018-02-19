@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="DetailList.aspx" />
     <Content Include="GuildRanking.aspx" />
     <Content Include="InsertID.aspx" />
     <Content Include="styles\font\Roboto-Bold.otf" />
@@ -274,6 +275,13 @@
   <ItemGroup>
     <Compile Include="Biz.cs" />
     <Compile Include="Dac.cs" />
+    <Compile Include="DetailList.aspx.cs">
+      <DependentUpon>DetailList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetailList.aspx.designer.cs">
+      <DependentUpon>DetailList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
