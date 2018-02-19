@@ -97,23 +97,32 @@ namespace WebApplication2
         //로그를 갱신할 캐릭터 id들을 예약하는 처리
         private void RefreshCharacterIds()
         {
-            DataSet ReservedDatas = Library.Database.Query("select characterId from reserved_refresh_characterIds");
-            DataTable ReservedIdsTable = ReservedDatas.Tables[0];
-            if (ReservedIdsTable.Rows.Count == 0) //예약된 characterid들이 없으면 다시 갱신할수 있도록 모든 characterid insert
+            DataSet ReservedDatas = Library.Database.Query("select characterId, isNew from reserved_refresh_characterIds");
+            DataRowCollection ReservedIdsRows = ReservedDatas.Tables[0].Rows;
+            if (ReservedIdsRows.Count == 0) //예약된 characterid들이 없으면 다시 갱신할수 있도록 모든 characterid insert
             {
                 DataSet CharacterInfoDatas = Library.Database.Query("select characterId from character_info");
                 DataTable CharacterInfoTable = CharacterInfoDatas.Tables[0];
 
                 if (CharacterInfoTable.Rows.Count > 0)
                 {
+                    DataRowCollection ContentLogRows = Library.Database.Query("select characterId from content_log group by characterId").Tables[0].Rows;
+                    Dictionary<string, bool> CharacterIdCaching = new Dictionary<string, bool>();
+                    foreach(DataRow ContentLogRow in ContentLogRows)
+                    {
+                        CharacterIdCaching.Add(ContentLogRow["characterId"].ToString(), true);
+                    }
+
                     System.Text.StringBuilder InsertQueryBuilder = new System.Text.StringBuilder();
-                    InsertQueryBuilder.Append("insert into reserved_refresh_characterIds(characterId) values ");
+                    InsertQueryBuilder.Append("insert into reserved_refresh_characterIds(characterId, isNew) values ");
                     bool IsFirst = true;
                     foreach (DataRow Row in CharacterInfoTable.Rows)
                     {
                         if (!IsFirst)
                             InsertQueryBuilder.Append(',');
-                        InsertQueryBuilder.AppendFormat("('{0}')", Row["characterId"].ToString());
+                        string CharacterId = Row["characterId"].ToString();
+                        bool IsNew = !CharacterIdCaching.ContainsKey(CharacterId);
+                        InsertQueryBuilder.AppendFormat("('{0}', {1})", CharacterId, IsNew ? 1 : 0);
                         IsFirst = false;
                     }
 
@@ -122,16 +131,36 @@ namespace WebApplication2
             }
             else
             {
-                
-                DataRow Row = ReservedIdsTable.Rows[0];
-                string CharacterId = Row["characterId"].ToString();
-                string Url = Library.Network.GetTimelineUrl(CharacterId);
+                List<string> ReservedCachingIds = new List<string>();
+                foreach (DataRow ReservedIdsRow in ReservedIdsRows)
+                {
+                    bool OutIsNew = true;
+                    if(bool.TryParse(ReservedIdsRow["isNew"].ToString(), out OutIsNew))
+                    {
+                        if(!OutIsNew)
+                        {
+                            ReservedCachingIds.Add(ReservedIdsRow["characterId"].ToString());
+                        }
+                    }
+                }
+
+                if(ReservedCachingIds.Count == 0)
+                {
+                    ReservedCachingIds.Add(ReservedIdsRows[0]["characterId"].ToString());
+                }
+
+                string DeleteCharacterIds = '\''+ ReservedCachingIds.Aggregate(((i, j) => i + "\',\'" + j)) + '\'';
 
                 System.Text.StringBuilder DeleteQueryBuilder = new System.Text.StringBuilder();
-                DeleteQueryBuilder.AppendFormat("delete from reserved_refresh_characterIds where characterId='{0}'", CharacterId);
+                DeleteQueryBuilder.AppendFormat("delete from reserved_refresh_characterIds where characterId in ({0})", DeleteCharacterIds);
                 Library.Database.Query(DeleteQueryBuilder.ToString());
 
-                InsertTimelineUrl(CharacterId, Url);
+                foreach(string CharacterId in ReservedCachingIds)
+                {
+                    string Url = Library.Network.GetTimelineUrl(CharacterId);
+                    InsertTimelineUrl(CharacterId, Url);
+                }
+                
             }
 
             
