@@ -28,12 +28,13 @@ namespace WebApplication2
 
             public TimelineHellEpic(string CharacterId_, JToken JsonData)
             {
+                JToken DataToken = JToken.Parse(JsonData["data"].ToString());
                 CharacterId = CharacterId_;
-                ItemId = JsonData["itemId"].ToString();
-                ItemName = JsonData["itemName"].ToString();
-                ChannelName = JsonData["channelName"].ToString();
-                ChannelNo = Int16.Parse(JsonData["channelNo"].ToString());
-                dungeonName = JsonData["dungeonName"].ToString();
+                ItemId = DataToken["itemId"].ToString();
+                ItemName = DataToken["itemName"].ToString();
+                ChannelName = DataToken["channelName"].ToString();
+                ChannelNo = Int16.Parse(DataToken["channelNo"].ToString());
+                dungeonName = DataToken["dungeonName"].ToString();
                 Date = JsonData["date"].ToString();
             }
 
@@ -55,10 +56,11 @@ namespace WebApplication2
 
             public TimelineSealedLock(string CharacterId_, JToken JsonData)
             {
+                JToken DataToken = JToken.Parse(JsonData["data"].ToString());
                 CharacterId = CharacterId_;
-                ItemId = JsonData["itemId"].ToString();
-                ItemName = JsonData["itemName"].ToString();
-                Booster = JsonData["booster"].ToString() != "false";
+                ItemId = DataToken["itemId"].ToString();
+                ItemName = DataToken["itemName"].ToString();
+                Booster = DataToken["booster"].ToString() != "false";
                 Date = JsonData["date"].ToString();
             }
 
@@ -73,10 +75,15 @@ namespace WebApplication2
         private struct TimelineData
         {
             string CharacterId;
-            Int16 Code;
             string Name;
             string Data;
             string Date;
+
+            public Int16 Code
+            {
+                get;
+                private set;
+            }
 
             public TimelineData(string CharacterId_, JToken JsonData)
             {
@@ -322,11 +329,18 @@ namespace WebApplication2
                             TimelineUrl = null;
                             break;
                         }
-                            
 
                         TimeLineDatas.Add(LogData);
-                        TimeLineSealedLockValues.Add(new TimelineSealedLock(CharacterId, TimelineRowData).ToInsertQuery());
-                        TimeLineHellEpicValues.Add(new TimelineHellEpic(CharacterId, TimelineRowData).ToInsertQuery());
+                        if(LogData.Code == 505) //hell epic
+                        {
+                            TimeLineHellEpicValues.Add(new TimelineHellEpic(CharacterId, TimelineRowData).ToInsertQuery());
+                        }
+                        else if(LogData.Code == 501)
+                        {
+                            TimeLineSealedLockValues.Add(new TimelineSealedLock(CharacterId, TimelineRowData).ToInsertQuery());
+                        }
+                        
+                        
                         //InsertQueryBuilder.AppendFormat("('{0}', {1}, '{2}', '{3}', '{4}')", CharacterId, TimelineRowData["code"], TimelineRowData["name"], TimelineRowData["data"], TimelineRowData["date"]);
                     }
                 }
