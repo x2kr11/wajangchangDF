@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="ArmorList.aspx" />
     <Content Include="DetailList.aspx" />
     <Content Include="GuildRanking.aspx" />
     <Content Include="InsertID.aspx" />
@@ -273,6 +274,13 @@
     <Content Include="default.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArmorList.aspx.cs">
+      <DependentUpon>ArmorList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArmorList.aspx.designer.cs">
+      <DependentUpon>ArmorList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Biz.cs" />
     <Compile Include="Dac.cs" />
     <Compile Include="DetailList.aspx.cs">

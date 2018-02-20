@@ -279,77 +279,23 @@ namespace WebApplication2
         }
 
         /// <summary>
-        /// character_info 테이블 Select
-        /// </summary>
-        /// <returns></returns>
-        public DataSet GetInfo()
-        {
-            DataSet ds = new DataSet();
-
-            //db연결
-            SqlConnection conn = new SqlConnection(dbConnect);
-            conn.Open();
-
-            //sql 조회문
-            string sql = "Select id,serverId,characterId,characterName,adventureName,quildId From character_info";
-
-            SqlDataAdapter ad = new SqlDataAdapter(sql, conn);
-
-            //조회한 결과를 dataset에 저장 후 리턴
-            ad.Fill(ds);
-
-            conn.Close();
-            return ds;
-        }
-
-        /// <summary>
         /// 모험단 지옥파티 아이템 리스트
         /// </summary>
         private void GetContentLog()
         {      
             Hashtable ht = new Hashtable();
             ht.Add("adventure_NM", txtName.Text);
+            ht.Add("girinCheck", "N");
 
             Biz wDac = new Biz();
             DataSet ds = wDac.GetContentLog(ht);
-
-            DataTable dt = ds.Tables[0];
-            DataTable dt2 = ds.Tables[1];
-
-            dt.Columns.Add(new DataColumn("itemId", typeof(string)));
-            dt.Columns.Add(new DataColumn("itemName", typeof(string)));
-            dt.Columns.Add(new DataColumn("channelName", typeof(string)));
-            dt.Columns.Add(new DataColumn("channelNo", typeof(string)));
-            dt.Columns.Add(new DataColumn("dungeonName", typeof(string)));
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                JToken dfJson = JToken.Parse(dt.Rows[i]["data"].ToString());
-                dt.Rows[i]["itemId"] = dfJson["itemId"];
-                dt.Rows[i]["itemName"] = dfJson["itemName"];
-                dt.Rows[i]["channelName"] = dfJson["channelName"];
-                dt.Rows[i]["channelNo"] = dfJson["channelNo"];
-                dt.Rows[i]["dungeonName"] = dfJson["dungeonName"];
-            }
-
-            dt2.Columns.Add(new DataColumn("itemId", typeof(string)));
-            dt2.Columns.Add(new DataColumn("itemName", typeof(string)));
-            dt2.Columns.Add(new DataColumn("booster", typeof(string)));
-
-            for (int i = 0; i < dt2.Rows.Count; i++)
-            {
-                JToken dfJson = JToken.Parse(dt2.Rows[i]["data"].ToString());
-                dt2.Rows[i]["itemId"] = dfJson["itemId"];
-                dt2.Rows[i]["itemName"] = dfJson["itemName"];
-                dt2.Rows[i]["booster"] = dfJson["booster"];
-            }
-
-            gvCount.Text = dt.Rows.Count.ToString();
-            gvList.DataSource = dt;
+            
+            gvCount.Text = ds.Tables[0].Rows.Count.ToString();
+            gvList.DataSource = ds.Tables[0];
             gvList.DataBind();
 
-            gvCount2.Text = dt.Rows.Count.ToString();
-            gvList2.DataSource = dt2;
+            gvCount2.Text = ds.Tables[1].Rows.Count.ToString();
+            gvList2.DataSource = ds.Tables[1];
             gvList2.DataBind();
         }
         #endregion

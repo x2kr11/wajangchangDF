@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -10,10 +9,9 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication2
 {
-    public partial class DetailList : System.Web.UI.Page
+    public partial class ArmorList : System.Web.UI.Page
     {
         #region 전역변수 정의
-     
         #endregion
 
         #region 이벤트 정의
@@ -21,34 +19,32 @@ namespace WebApplication2
         {
             if (!IsPostBack)
             {
+                //ddl 바인딩
                 GetAdventureList();
-
-                GetContentLog();
+                //GridView 바인딩
+                GetArmorEpciList();
             }
             else
-                GetContentLog();
-
+                GetArmorEpciList();
         }
+
         protected void btnAdventure_Click(object sender, EventArgs e)
         {
 
         }
 
-        protected void gvGirinList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvArmorList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvGirinList.PageIndex = e.NewPageIndex;
-            GetContentLog();
+            gvArmorList.PageIndex = e.NewPageIndex;
+            GetArmorEpciList();
         }
         #endregion
 
         #region UI 이벤트 정의
-        /// <summary>
-        /// ddl 바인딩
-        /// </summary>
         private void GetAdventureList()
         {
             ListItem item;
-            
+
             Biz wBiz = new Biz();
             DataSet ds = wBiz.GetAdventureList();
 
@@ -56,7 +52,7 @@ namespace WebApplication2
             {
                 DataRow[] drAdventureList = ds.Tables[0].Select();
 
-                for(int i = 0; i < drAdventureList.Length; i++)
+                for (int i = 0; i < drAdventureList.Length; i++)
                 {
                     item = new ListItem();
                     item.Value = drAdventureList[i]["adventureName"].ToString();
@@ -67,22 +63,21 @@ namespace WebApplication2
                 ddlGirin.Items.FindByText("스쿠").Selected = true;
             }
         }
-
-        /// <summary>
-        /// 아이템 리스트 조회
-        /// </summary>
-        private void GetContentLog()
+        private void GetArmorEpciList()
         {
             Hashtable ht = new Hashtable();
             ht.Add("adventure_NM", ddlGirin.Value);
-            ht.Add("girinCheck", "Y");
+            ht.Add("item_NM", ddlArmor.Value);
 
             Biz wBiz = new Biz();
-            DataSet ds = wBiz.GetContentLog(ht);
+            DataSet ds = wBiz.GetHellEpicList(ht);
 
-            gvGirinList.DataSource = ds;
-            gvGirinList.DataBind();
+            gvArmorList.DataSource = ds;
+            gvArmorList.DataBind();
+
+            gvCount.Text = ds.Tables[1].Rows[0][0].ToString();
         }
+
         #endregion
     }
 }
