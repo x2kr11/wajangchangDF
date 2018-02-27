@@ -36,6 +36,13 @@ namespace WebApplication2
             ds = wDac.GetAdventureList();
             return ds;
         }
-    
+
+        public DataSet GetHellEpicList(Hashtable ht)
+        {
+            Dac wDac = new Dac();
+            DataSet ds = new DataSet();
+            ds = wDac.GetHellEpicList(ht);
+            return ds;
+        }
     }
 }

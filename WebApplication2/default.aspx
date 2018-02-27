@@ -57,6 +57,10 @@
             MostiPopup.ShowPopup("DetailList.aspx", "기린 목록", 940, 420);
             return false;
         }
+        function btnArmor_Click() {
+            MostiPopup.ShowPopup("ArmorList.aspx", "기린 목록", 940, 420);
+            return false;
+        }
     </script>
 </head>
 <body>
@@ -85,6 +89,9 @@
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnLunch" runat="server" OnClientClick="return btnFlag_Click('Lunch')" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">LunchSearch</span>
+                        </asp:LinkButton>
+                         <asp:LinkButton ID="btnArmor" runat="server" CssClass="btn_txt btn_srch btn_color_b" OnClientClick="return btnArmor_Click()">
+                            <span css="txt">90제 세트 방어구 검색</span>
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnGirin" runat="server" CssClass="btn_txt btn_srch btn_color_b" OnClientClick="return btnGirin_Click()">
                             <span css="txt">황홀, 3신기 검색</span>
@@ -250,17 +257,6 @@
                             <ItemStyle CssClass="board_list_data align_center" />
                             <ItemTemplate>
                                 <%# Eval("characterName") %>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-
-                        <asp:TemplateField>
-                            <HeaderStyle CssClass="board_list_head" Width="5%" />
-                            <HeaderTemplate>
-                                Name
-                            </HeaderTemplate>
-                            <ItemStyle CssClass="board_list_data align_center" />
-                            <ItemTemplate>
-                                <%# Eval("name") %>
                             </ItemTemplate>
                         </asp:TemplateField>
 
