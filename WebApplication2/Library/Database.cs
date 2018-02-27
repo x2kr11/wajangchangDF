@@ -46,6 +46,11 @@ namespace WebApplication2.Library
             return ds;
         }
 
+        public static DataSet Query(string query, params object[] objs)
+        {
+            return Query(string.Format(query, objs));
+        }
+
         public static string GetCharacterID(string CharacterName)
         {
             DataSet ds = Query("select characetId from character_info");

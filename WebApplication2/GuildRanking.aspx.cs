@@ -251,13 +251,8 @@ namespace WebApplication2
 
                 string DeleteCharacterIds = '\''+ ReservedCachingIds.Aggregate(((i, j) => i + "\',\'" + j)) + '\'';
 
-                System.Text.StringBuilder DeleteQueryBuilder = new System.Text.StringBuilder();
-                DeleteQueryBuilder.AppendFormat("delete from reserved_refresh_characterIds where characterId in ({0})", DeleteCharacterIds);
-                Library.Database.Query(DeleteQueryBuilder.ToString());
-
-                System.Text.StringBuilder UpdateQueryBuilder = new System.Text.StringBuilder();
-                UpdateQueryBuilder.AppendFormat("update reserved_refresh_characterIds set isNew = {0} where characterId in ({1})", 0, DeleteCharacterIds);
-                Library.Database.Query(UpdateQueryBuilder.ToString());
+                Library.Database.Query("delete from reserved_refresh_characterIds where characterId in ({0})", DeleteCharacterIds);
+                Library.Database.Query("update reserved_refresh_characterIds set isNew = {0} where characterId in ({1})", 0, DeleteCharacterIds);
 
                 foreach (string CharacterId in ReservedCachingIds)
                 {
