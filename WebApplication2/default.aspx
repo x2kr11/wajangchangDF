@@ -78,6 +78,9 @@
                     </td>
                     <td class="btn_area">
                         <!-- 버튼 추가!-->
+                        <asp:LinkButton ID="btnRealTime" runat="server" CssClass="btn_txt btn_srch btn_color_b" PostBackUrl="~/RealTime.aspx">
+                        <span css="txt">오늘의 에픽</span>
+                        </asp:LinkButton>
                         <asp:LinkButton ID="btnSku" runat="server" OnClientClick="return btnFlag_Click('Sku')" OnClick="btnGetDate_Click" CssClass="btn_txt btn_srch btn_color_a">
                         <span css="txt">skuSearch</span>
                         </asp:LinkButton>

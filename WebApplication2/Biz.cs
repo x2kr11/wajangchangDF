@@ -44,5 +44,14 @@ namespace WebApplication2
             ds = wDac.GetHellEpicList(ht);
             return ds;
         }
+
+        //오늘의 에픽 조회
+        public DataSet GetTodayEpic()
+        {
+            Dac wDac = new Dac();
+            DataSet ds = new DataSet();
+            ds = wDac.GetTodayEpic();
+            return ds;
+        }
     }
 }

@@ -20,7 +20,8 @@ namespace WebApplication2
         protected readonly string UP_CMM_CONTENT_L = "UP_CMM_Content_L";
         protected readonly string UP_CMM_CACID_L = "UP_CMM_CacID_L";
         protected readonly string UP_CMM_ADVENTURE_L = "UP_CMM_Adventure_L";
-        protected readonly string UP_CMM_HELLEPCI_L = "UP_CMM_HellEpic_L";       
+        protected readonly string UP_CMM_HELLEPCI_L = "UP_CMM_HellEpic_L";
+        protected readonly string UP_CMM_TODAYEPIC_L = "UP_CMM_TodayEpci_L";
         #endregion
 
         public SqlConnection getConn()
@@ -93,6 +94,19 @@ namespace WebApplication2
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@adventure_NM", ht["adventure_NM"]);
             cmd.Parameters.AddWithValue("@item_NM", ht["item_NM"]);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            dbConn.Open();
+            DataSet ds = new DataSet();
+            da.Fill(ds, "select");
+            dbConn.Close();
+            return ds;
+        }
+
+        //오늘의 에픽 조회
+        public DataSet GetTodayEpic()
+        {
+            SqlCommand cmd = new SqlCommand(UP_CMM_TODAYEPIC_L,getConn());
+            cmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             dbConn.Open();
             DataSet ds = new DataSet();
