@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RealTime.aspx.cs" Inherits="WebApplication2.RealTime" %>
 
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -113,11 +115,11 @@
             <!-- //Sub Title -->
             <!-- Board List -->
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-            <asp:Timer ID="TodayEpicTimer" runat="server" Interval="10000" OnTick="Timer1_Tick"></asp:Timer>
+            <asp:Timer ID="TodayEpicTimer" runat="server" Interval="60000" OnTick="Timer1_Tick"></asp:Timer>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <div class="board_list" style="margin-bottom: 10px">
-                        <asp:GridView ID="gvList" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="50" OnDataBound="gvList_DataBound" OnPageIndexChanging="gvList_PageIndexChanging" PageIndex="0">
+                        <asp:GridView ID="gvList" runat="server" AutoGenerateColumns="false" CssClass="board_list_table" ShowHeaderWhenEmpty="True" CellPadding="0" AllowPaging="true" PageSize="15" OnDataBound="gvList_DataBound" OnPageIndexChanging="gvList_PageIndexChanging" PageIndex="0">
                             <HeaderStyle CssClass="board_list_row" />
                             <RowStyle CssClass="board_list_row" />
                             <EmptyDataRowStyle CssClass="empty" />
@@ -190,34 +192,52 @@
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
+
+                    </div>
+                    <!-- //Board List-->
+                    <asp:Chart ID="chartWajangchang" runat="server" DataSourceID="SqlDataSource1" Width="1024px">
+                        <Series>
+                            <asp:Series Name="Series1" XValueMember="adventureName" YValueMembers="epic"></asp:Series>
+                        </Series>
+
+                        <ChartAreas>
+                            <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                        </ChartAreas>
+
+                    </asp:Chart>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:wajangchangConnectionString %>" SelectCommand="SELECT B.adventureName
+		  ,Count(*) AS epic
+	FROM timeline_hell_epic A
+	INNER JOIN character_info B ON A.characterId = B.characterId
+	WHERE convert(int, convert(char(8), date , 112)) = convert(varchar(8), GetDate(), 112)
+	GROUP BY B.adventureName
+	ORDER BY epic DESC"></asp:SqlDataSource>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="TodayEpicTimer" EventName="Tick" />
                 </Triggers>
             </asp:UpdatePanel>
-        </div>
-        <!-- //Board List-->
-        <!-- Layer Popup -->
-        <div id="mw">
-            <div class="pop_bg"></div>
-            <div id="__layer_pop" class="pop_layer_s">
-                <div class="pop_tit_wrap">
-                    <h2 class="pop_tit" id="__layer_pop_title">Popup Title</h2>
-                    <a href="javascript:;" class="close_area">
-                        <span class="pop_layer_btn pop_layer_btn_close">
-                            <span class="blind">팝업 닫기</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="pop_con_fix" id="__layer_pop_content_body1">
-                    <div class="pop_con_area" id="__layer_pop_content_body2">
-                        <iframe id="__layer_pop_content_frame" name="__layer_pop_content_frame" style="width: 100%; border: 0px;"></iframe>
+            <!-- Layer Popup -->
+            <div id="mw">
+                <div class="pop_bg"></div>
+                <div id="__layer_pop" class="pop_layer_s">
+                    <div class="pop_tit_wrap">
+                        <h2 class="pop_tit" id="__layer_pop_title">Popup Title</h2>
+                        <a href="javascript:;" class="close_area">
+                            <span class="pop_layer_btn pop_layer_btn_close">
+                                <span class="blind">팝업 닫기</span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="pop_con_fix" id="__layer_pop_content_body1">
+                        <div class="pop_con_area" id="__layer_pop_content_body2">
+                            <iframe id="__layer_pop_content_frame" name="__layer_pop_content_frame" style="width: 100%; border: 0px;"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <input type="hidden" id="hidMenuId" name="hidMenuId" value=" " />
-        <!-- //Layer Popup -->
+            <input type="hidden" id="hidMenuId" name="hidMenuId" value=" " />
+            <!-- //Layer Popup -->
     </form>
 </body>
 </html>

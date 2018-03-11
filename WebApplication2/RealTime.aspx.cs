@@ -36,6 +36,8 @@ namespace WebApplication2
             Biz wBiz = new Biz();
             DataSet ds = wBiz.GetTodayEpic();
 
+            chartWajangchang.DataBind();
+
             gvList.DataSource = ds;
             gvList.DataBind();
         }
