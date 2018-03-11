@@ -209,7 +209,7 @@
 		  ,Count(*) AS epic
 	FROM timeline_hell_epic A
 	INNER JOIN character_info B ON A.characterId = B.characterId
-	WHERE convert(int, convert(char(8), date , 112)) = convert(varchar(8), GetDate(), 112)
+	WHERE date >= DATEADD(Hour, 6, convert(varchar(10), DATEADD(Hour, -6, GetDate()), 120))
 	GROUP BY B.adventureName
 	ORDER BY epic DESC"></asp:SqlDataSource>
                 </ContentTemplate>
