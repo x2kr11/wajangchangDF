@@ -195,7 +195,7 @@
 
                     </div>
                     <!-- //Board List-->
-                    <asp:Chart ID="chartWajangchang" runat="server" DataSourceID="SqlDataSource1" Width="1024px">
+             <asp:Chart ID="chartWajangchang" runat="server" DataSourceID="SqlDataSource1" Width="1024px">
                         <Series>
                             <asp:Series Name="Series1" XValueMember="adventureName" YValueMembers="epic"></asp:Series>
                         </Series>
