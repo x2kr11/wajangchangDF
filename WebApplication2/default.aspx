@@ -233,7 +233,7 @@
                 <div class="opt_tit_left">
                     <div class="elmt">
                         <span class="opt_tit_bu opt_tit_bu_01"></span>
-                        <span class="txt">Search Result </span>
+                        <span class="txt">Search Result 봉자! </span>
                     </div>
                 </div>
                 <div class="opt_tit_right">

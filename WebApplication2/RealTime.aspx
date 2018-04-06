@@ -49,38 +49,8 @@
             color: #000;
             border: 1px solid #3AC0F2;
         }
-          .ui-datepicker-calendar {
-            display: none;
-        }
-
-        .ui-datepicker-prev {
-            display: none;
-        }
-
-        .ui-datepicker-next {
-            display: none;
-        }
     </style>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //datepicker 초기화 YYMM 형식
-            $('.inp_date').datepicker({
-                showOn: "button",
-                buttonImage: "/styles/images/form/calendar.jpg",
-                buttonImageOnly: true,
-                buttonText: "Select date",
-                dateFormat: "yy-mm",
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                onClose: function (dateText, inst) {
-                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                    $(this).datepicker('setDate', new Date(year, month, 1));
-                }
-            });
-        });
-    </script>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -102,24 +72,27 @@
             <!-- //Page Title -->
             <!-- Search-->
             <div class="srch_type01 skin01">
-                    <div class="condition_area">
+                <%--    <div class="condition_area">
                     <table class="condition_table" summary="Search Table">
                         <caption>Search Table</caption>
                         <tbody>
                             <tr>
-                                <th scope="col" class="condition_t_head">날자 선택</th>
+                                <th scope="col" class="condition_t_head">Search Condition</th>
                                 <td class="condition_t_data" style="width: 120px;">
-                                   <input type="text" class="inp_date" id="txtFrom" runat="server" />
-                                   <span class="name">~</span>
-                                   <input type="text" class="inp_date" id="txtTo" runat="server" />
-                                </td>                               
+                                    <select class="jqForm pct" id="ddlCondition" runat="server">
+                                        <option value="cacNm">캐릭터 이름</option>
+                                        <option value="adventureNM">모험단 검색</option>
+                                    </select>
+                                </td>
+                                <td class="condition_t_data noborder_left">
+                                    <asp:TextBox ID="txtName" runat="server" CssClass="pct"></asp:TextBox></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-             <%--   <div class="btn_area">
-                    <asp:LinkButton ID="btnSearch" runat="server" CssClass="btn_txt btn_srch btn_color_a">       
-                            <span css="txt">Today Search</span>
+                <div class="btn_area">
+                    <asp:LinkButton ID="btnSearch" runat="server" OnClick="btnSearch_Click" CssClass="btn_txt btn_srch btn_color_a">       
+                            <span css="txt">Search</span>
                     </asp:LinkButton>
                 </div>--%>
             </div>

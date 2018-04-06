@@ -75,7 +75,6 @@
     <Content Include="DetailList.aspx" />
     <Content Include="GuildRanking.aspx" />
     <Content Include="InsertID.aspx" />
-    <Content Include="RaidCount.aspx" />
     <Content Include="RealTime.aspx" />
     <Content Include="styles\font\Roboto-Bold.otf" />
     <Content Include="styles\font\Roboto-Bold.woff" />
@@ -319,13 +318,6 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="RaidCount.aspx.cs">
-      <DependentUpon>RaidCount.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RaidCount.aspx.designer.cs">
-      <DependentUpon>RaidCount.aspx</DependentUpon>
     </Compile>
     <Compile Include="RealTime.aspx.cs">
       <DependentUpon>RealTime.aspx</DependentUpon>

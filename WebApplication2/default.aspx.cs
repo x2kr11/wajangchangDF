@@ -28,7 +28,8 @@ namespace WebApplication2
         //private string[] strCacId = new string[];
         private ArrayList arrayCacID = new ArrayList();
         private int _skuCount = 1;
-		//d9ba8ef7552d6165e6e8cf6388967571 = 독품은스쿠
+        string dbConnect = "server = 118.37.235.181; uid=sku; pwd = tmzn; database = wajangchang";
+        //d9ba8ef7552d6165e6e8cf6388967571 = 독품은스쿠
         #endregion
 
         #region #이벤트 정의
