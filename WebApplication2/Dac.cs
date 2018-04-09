@@ -12,7 +12,8 @@ namespace WebApplication2
     public class Dac
     {
         #region 전역변수
-        string ConnectionString = ConfigurationManager.ConnectionStrings["wajangchang"].ConnectionString;
+        //string ConnectionString = ConfigurationManager.ConnectionStrings["wajangchang"].ConnectionString;
+        string ConnectionString = ConfigurationManager.ConnectionStrings["wajangchangDesk"].ConnectionString;
         public SqlConnection dbConn;        
         #endregion
 

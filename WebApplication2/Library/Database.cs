@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace WebApplication2.Library
 {
     public static class Database
     {
-        static string dbConnect = "server = 118.37.235.181; uid=sku; pwd = tmzn; database = wajangchang";
+        //static string dbConnect = "server = 118.37.235.181; uid=sku; pwd = tmzn; database = wajangchang";
+        static string dbConnect = ConfigurationManager.ConnectionStrings["wajangchangDesk"].ConnectionString;
         static SqlConnection connection;
         private static SqlConnection DatabaseConnection
         {
